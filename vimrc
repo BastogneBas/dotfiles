@@ -60,6 +60,7 @@ set ts=4
 set sw=4
 set ml
 set nu
+let g:ale_completion_enabled = 1
 
 call plug#begin('~/.vim/plugged')
 Plug 'w0rp/ale'

@@ -9,14 +9,15 @@ rofi.modi: window,run,ssh,emoji
 urxvt*font:			xft:xos4 Terminus:size=12
 urxvt*foreground:	#ffffff
 urxvt*depth:		32
-urxvt*background:	rgba:0000/0000/0000/df00
+urxvt*background:	rgba:0000/0000/0000/af00
 URxvt.perl-ext-common: fullscreen
 URxvt.keysym.F11:	perl:fullscreen:switch
+URxvt*scrollBar:	false
 !Xft*dpi:		220
 !Xft*antialias:		true
 !Xft*hinting:		full
 !URxvt*transparent:	true
-!URxvt*shading:		20
+!URxv*shading:		20
 
 ! Base16 Classic Dark
 ! Scheme: Jason Heeris (http://heeris.id.au)

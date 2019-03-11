@@ -34,3 +34,4 @@ fi
 export GPG_TTY=$(tty)
 
 export QSYS_ROOTDIR="/home/bas/Downloads/quartus-lite/pkg/quartus-lite/opt/altera/quartus/sopc_builder/bin"
+export XDG_CONFIG_HOME="$HOME/.config"

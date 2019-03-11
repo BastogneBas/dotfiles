@@ -75,9 +75,9 @@ line-color = #f00
 ;border-size = 2
 ;border-color = #00000000
 border-bottom-size = 0
-border-top-size = 10
-border-left-size = 10
-border-right-size = 10
+border-top-size = 0
+border-left-size = 0
+border-right-size = 0
 border-bottom-color = #000f0f0f
 border-top-color	= #000f0f0f
 border-left-color	= #000f0f0f
@@ -97,15 +97,15 @@ font-1 = Terminus (TTF):pixelsize=8:antialias=true;0
 #font-2 = siji:pixelsize=10;1
 font-2 = "Wuncon Siji:size=20;1"
 
-modules-left = bspwm i3 date xkeyboard mpd
+modules-left = bspwm i3 date xkeyboard mpd prev playpause next spotify
 modules-center = battLow
-modules-right = filesystem xbacklight pulseaudio eth eth2 eth3 wlan memory cpu battery info-hackspeed powermenu
+modules-right = filesystem xbacklight pulseaudio ethAndroid eth eth2 eth3 wlan memory cpu battery info-hackspeed powermenu
 
 tray-position = right
 tray-detached = false
 tray-maxsize = 32
-;tray-padding = 4
-tray-padding = 0
+tray-padding = 4
+;tray-padding = 0
 ;tray-background = #000f0f0f
 
 margin-top = 10
@@ -133,7 +133,7 @@ modules-center = temperature_c0 temperature_c1 temperature_c2 temperature_c3
 modules-right = clockspeed_c0 clockspeed_c1 clockspeed_c2 clockspeed_c3 clockspeed_c4 clockspeed_c5 clockspeed_c6 clockspeed_c7
 padding-left = 4
 padding-right = 4
-border-bottom-size = 10
+border-bottom-size = 0
 border-top-size = 0
 
 [bar/bar2]
@@ -302,6 +302,38 @@ icon-next = 
 label-song-maxlen = 25
 label-song-ellipsis = true
 
+
+; {{{
+
+[module/prev]
+type = custom/text
+content = 
+click-left = playerctl previous
+content-padding = 0
+
+[module/playpause]
+type = custom/script
+exec = ~/.config/polybar/playpause.sh
+interval = 1
+label = %output%
+label-padding = 1
+click-left = playerctl play-pause
+
+[module/next]
+type = custom/text
+content = 
+click-left = playerctl next
+content-padding = 0
+
+[module/spotify]
+type = custom/script
+exec = ~/.config/polybar/spotify.sh
+interval = 1
+label = %output%
+label-padding = 1
+
+; }}}
+
 [module/xbacklight]
 type = internal/xbacklight
 
@@ -328,8 +360,8 @@ card = intel_backlight
 type = internal/cpu
 interval = 1
 format-prefix = " "
-format-prefix-background = ${colors.cpu_p_bg}
-format-prefix-foreground = ${colors.modules_prefix_fg}
+;format-prefix-background = ${colors.cpu_p_bg}
+format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #f90000
 label = %percentage:2%%
 
@@ -389,6 +421,10 @@ interface = enp0s20f0u2u4
 inherit = module/eth
 interface = enp0s20f0u2u3
 
+[module/ethAndroid]
+inherit = module/eth
+interface = enp62s0u1
+
 [module/date]
 type = internal/date
 interval = 1
@@ -404,6 +440,8 @@ format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #0a6cf5
 
 label = %date% %time%
+label-background = ${colors.bar_bg}
+label-foreground = ${colors.bar_fg}
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -579,7 +617,7 @@ menu-0-2-exec = menu-open-3
 menu-0-3 = Ieuw windows
 menu-0-3-exec = menu-open-4
 menu-0-4 = lock
-menu-0-4-exec = i3lock -i ~/Downloads/dd-ar_3.png -p win -b -f -t
+menu-0-4-exec = i3lock -i ~/Downloads.old/dd-ar_3.png -p win -b -f -t
 
 menu-1-0 = cancel
 menu-1-0-exec = menu-open-0
