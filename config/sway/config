@@ -5,34 +5,110 @@
 # this file and re-run i3-config-wizard(1).
 #
 
-exec_always xrandr --output eDP1 --auto --output DP2 --auto --right-of eDP1 --primary --output HDMI1 --auto --right-of DP2 --output DP1 --auto --right-of eDP1 --primary
+# .xinitrc {{{
+#setxkbmap us dvorak-intl
+#exec xset +fp /home/bas/.fonts
+#exec xset fp rehash
+
+
+
+#xrandr --output eDP1 --auto --dpi 196
+#exec xrandr --output eDP1 --auto --output DP1 --auto --right-of eDP1 --primary
+#exec xrandr --output eDP1 --auto --output DP2 --auto --right-of eDP1 --primary --output HDMI1 --auto --right-of DP2
+
+exec xrdb -merge ~/.Waylandresources
+
+#exec dbus-update-activation-environment --systemd DISPLAY
+exec 'eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)'
+exec export SSH_AUTH_SOCK
+
+#xcompmgr -c &
+#compton -c &
+#exec i3
+
+# }}}
+#
+output eDP-1 pos 0 0
+output eDP-1 scale 2
+output eDP-1 bg /home/bas/Backgrounds/DSC_1139.JPG fill
+output DP-2 bg /home/bas/Backgrounds/IMG_2154.JPG fill
+output DP-1 bg /home/bas/Backgrounds/IMG_2154.JPG fill
+output HDMI-A-1 bg /home/bas/Backgrounds/DSC_9087.jpg fill
+
+input 1:1:AT_Translated_Set_2_keyboard {
+	xkb_layout us,us
+    xkb_model pc104
+    xkb_variant dvorak,intl
+    xkb_options terminate:ctrl_alt_bksp,rupeesign:4,lvl3:ralt_switch,eurosign:5,compose:rctrl
+}
+
+input 16700:8195:Dell_Dell_USB_Keyboard {
+	xkb_layout us,us
+    xkb_model pc104
+    xkb_variant dvorak,intl
+    xkb_options terminate:ctrl_alt_bksp,rupeesign:4,lvl3:ralt_switch,eurosign:5,compose:rctrl
+}
+
+input 1739:31251:DLL07BE:01_06CB:7A13_Touchpad {
+	tap enabled
+	natural_scroll enabled
+	scroll_factor 0.5
+	dwt enabled
+	middle_emulation enabled
+	scroll_method two_finger
+	click_method clickfinger
+}
+
+bar {
+	position top
+
+	status_command while date +'%Y-%m-%d %H:%M:%S %p'; do sleep 1; done
+
+	colors {
+		statusline #ffffff
+		background #323232
+		inactive_workspace #32323200 #32323200 #5c5c5c
+	}
+
+}
+
+bar {
+	position bottom
+	status_command while echo "$(/home/bas/battery)%"; do sleep 1; done
+	workspace_buttons no
+	colors {
+		statusline #ffffff
+		background #323232
+		inactive_workspace #32323200 #32323200 #5c5c5c
+	}
+}
 
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-set_from_resource $base00 color0  #151515
-set_from_resource $base01 color18 #202020
-set_from_resource $base02 color19 #303030
-set_from_resource $base03 color8  #505050
-set_from_resource $base04 color20 #b0b0b0
-set_from_resource $base05 color7  #d0d0d0
-set_from_resource $base06 color21 #e0e0e0
-set_from_resource $base07 color15 #f5f5f5
-set_from_resource $base08 color1  #ac4142
-set_from_resource $base09 color16 #d28445
-set_from_resource $base0A color11 #f4bf75
-set_from_resource $base0B color2  #90a959
-set_from_resource $base0C color14 #75b5aa
-set_from_resource $base0D color12 #6a9fb5
-set_from_resource $base0E color5  #aa759f
-set_from_resource $base0F color17 #8f5536
+#set_from_resource $base00 color0  #151515
+#set_from_resource $base01 color18 #202020
+#set_from_resource $base02 color19 #303030
+#set_from_resource $base03 color8  #505050
+#set_from_resource $base04 color20 #b0b0b0
+#set_from_resource $base05 color7  #d0d0d0
+#set_from_resource $base06 color21 #e0e0e0
+#set_from_resource $base07 color15 #f5f5f5
+#set_from_resource $base08 color1  #ac4142
+#set_from_resource $base09 color16 #d28445
+#set_from_resource $base0A color11 #f4bf75
+#set_from_resource $base0B color2  #90a959
+#set_from_resource $base0C color14 #75b5aa
+#set_from_resource $base0D color12 #6a9fb5
+#set_from_resource $base0E color5  #aa759f
+#set_from_resource $base0F color17 #8f5536
 
 #                       class   border  backgr. text indicator
-client.focused          $base05 $base05 $base00 $base05
-client.focused_inactive $base03 $base03 $base05 $base03
-client.unfocused        $base03 $base03 $base05 $base00
-client.urgent $base01 $base01 $base05 $base00
+#client.focused          $base05 $base05 $base00 $base05
+#client.focused_inactive $base03 $base03 $base05 $base03
+#client.unfocused        $base03 $base03 $base05 $base00
+#client.urgent $base01 $base01 $base05 $base00
 
 set $mod Mod4
 
@@ -43,7 +119,8 @@ set $mod Mod4
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
-font xft:xos4 Terminus 10
+#font monospace 10
+font Terminus (TTF) 10
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -57,7 +134,7 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec termite
 
 # start firefox
 bindsym $mod+backslash exec firefox
@@ -205,7 +282,7 @@ bindsym $mod+Shift+j reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+p restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+period exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+period exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -215,32 +292,32 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym t resize grow height 10 px or 10 ppt
-        bindsym n resize shrink height 10 px or 10 ppt
-        bindsym Shift+s resize grow width 1 px or 1 ppt
-        bindsym Shift+t resize grow height 1 px or 1 ppt
-        bindsym Shift+n resize shrink height 1 px or 1 ppt
-        bindsym Shift+s resize grow width 1 px or 1 ppt
+#        bindsym h resize shrink width 10 px or 10 ppt
+#        bindsym h resize shrink width 10 px or 10 ppt
+#        bindsym t resize grow height 10 px or 10 ppt
+#        bindsym n resize shrink height 10 px or 10 ppt
+#        bindsym Shift+s resize grow width 1 px or 1 ppt
+#        bindsym Shift+t resize grow height 1 px or 1 ppt
+#        bindsym Shift+n resize shrink height 1 px or 1 ppt
+#        bindsym Shift+s resize grow width 1 px or 1 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-        bindsym Shift+Left resize shrink width 1 px or 1 ppt
-        bindsym Shift+Down resize grow height 1 px or 1 ppt
-        bindsym Shift+Up resize shrink height 1 px or 1 ppt
-        bindsym Shift+Right resize grow width 1 px or 1 ppt
+#        bindsym Left resize shrink width 10 px or 10 ppt
+#        bindsym Down resize grow height 10 px or 10 ppt
+#        bindsym Up resize shrink height 10 px or 10 ppt
+#        bindsym Right resize grow width 10 px or 10 ppt
+#        bindsym Shift+Left resize shrink width 1 px or 1 ppt
+#        bindsym Shift+Down resize grow height 1 px or 1 ppt
+#        bindsym Shift+Up resize shrink height 1 px or 1 ppt
+#        bindsym Shift+Right resize grow width 1 px or 1 ppt
 
         # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+p mode "default"
+#        bindsym Return mode "default"
+#        bindsym Escape mode "default"
+#        bindsym $mod+p mode "default"
 }
 
-bindsym $mod+p mode "resize"
+#bindsym $mod+p mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -267,16 +344,18 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 5%- #decrease screen bright
 #bindsym Shift+XF86MonBrightnessUp exec sudo brightnessctl set +1% #increase screen brightness
 #bindsym Shift+XF86MonBrightnessDown exec sudo brightnessctl set 1%- #decrease screen brightness
 
-bindsym Print exec --no-startup-id maim -u -m 1 | xclip -selection clipboard -t image/png
-bindsym Shift+Print exec --no-startup-id maim -s -u -m 1 | xclip -selection clipboard -t image/png
+bindsym Print exec prtscrn
+bindsym Shift+Print exec prtsel
+bindsym Ctrl+Shift+Print exec --no-startup-id prtwin
 
 bindsym $mod+Ctrl+l exec --no-startup-id aplay /home/bas/Downloads.old/english.wav
+bindsym $mod+l exec --no-startup-id i3lock -i ~/Downloads.old/dd-ar_3.png -p win -b -f -t
 
-#exec --no-startup-id synclient VertScrollDelta=-113 HorizScrollDelta=-113 TapButton1=1 HorizTwoFingerScroll=1 TapButton2=3 TapButton3=2 PalmDetect=1
+exec --no-startup-id synclient VertScrollDelta=-113 HorizScrollDelta=-113 TapButton1=1 HorizTwoFingerScroll=1 TapButton2=3 TapButton3=2 PalmDetect=1
 exec --no-startup-id synclient VertScrollDelta=-113 HorizScrollDelta=-113 PalmDetect=1 HorizTwoFingerScroll=1
-exec_always --no-startup-id nitrogen --restore
-exec_always --no-startup-id killall compton; compton
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id nitrogen --restore
+#exec_always --no-startup-id killall compton; compton
+#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id dunst
-exec --no-startup-id i3-msg 'workspace 11; append_layout /home/bas/.config/i3/workspace-11.json'
-exec --no-startup-id i3-msg 'workspace 11; exec Telegram; workspace 1'
+#exec --no-startup-id swaymsg 'workspace 11; append_layout /home/bas/.config/i3/workspace-11.json'
+#exec --no-startup-id swaymsg 'workspace 11; exec Telegram; workspace 1'

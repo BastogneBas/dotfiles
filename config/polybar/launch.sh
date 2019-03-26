@@ -13,4 +13,7 @@ polybar bar6 &
 polybar bar7 &
 polybar bar8 &
 
+#polybar wbar1 &
+#polybar wbar8 &
+
 echo bars launched...

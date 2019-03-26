@@ -7,18 +7,19 @@ KEYBOARD_ID="AT Translated Set 2 keyboard"
 METRIC=cpm
 FORMAT=" %d $METRIC"
 
-INTERVAL=1
+INTERVAL=2
 
 # If you have a keyboard layout that is not listed here yet, create a condition
 # yourself. $3 is the key index. Use `xinput test "AT Translated Set 2 keyboard"`
 # to see key codes in real time.  Be sure to open a pull request for your
 # layout's condition!
 #LAYOUT=qwerty
-LAYOUT=dontcare
+LAYOUT=dvorak
 
 case "$LAYOUT" in
 	qwerty) CONDITION='($3 >= 10 && $3 <= 19) || ($3 >= 24 && $3 <= 33) || ($3 >= 37 && $3 <= 53) || ($3 >= 52 && $3 <= 58)'; ;;
 	azerty) CONDITION='($3 >= 10 && $3 <= 19) || ($3 >= 24 && $3 <= 33) || ($3 >= 37 && $3 <= 54) || ($3 >= 52 && $3 <= 57)'; ;;
+	dvorak) CONDITION='($3 >= 10 && $3 <= 19) || ($3 >= 27 && $3 <= 33) || ($3 >= 38 && $3 <= 47) || ($3 >= 53 && $3 <= 61)'; ;;
 	dontcare) CONDITION='1'; ;; # Just register all key presses, not only letters and numbers
 	*) echo "Unsupported layout \"$LAYOUT\""; exit 1; ;;
 esac

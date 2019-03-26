@@ -28,6 +28,9 @@ syntax on
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 "set background=dark
+"
+set nocompatible
+set secure exrc
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -60,11 +63,14 @@ set ts=4
 set sw=4
 set ml
 set nu
-let g:ale_completion_enabled = 1
+set fdm=marker
 
 call plug#begin('~/.vim/plugged')
 Plug 'w0rp/ale'
 call plug#end()
+
+let g:ale_completion_enabled = 1
+
 
 let g:jellybeans_overrides = {
 \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
