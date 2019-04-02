@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/usr/lib/systemd/system-sleep'
 let g:netrw_dirhist_2='/home/bas/Documents/systemd/src/systemctl'
 let g:netrw_dirhist_3='/home/bas/Documents/systemd/src/login'
@@ -7,3 +7,4 @@ let g:netrw_dirhist_4='/home/bas/Dokumentoj/Adafruit_ILI9341'
 let g:netrw_dirhist_5='/home/bas/Documents/linux-XPS-15-9560/pkg'
 let g:netrw_dirhist_6='/home/bas/.config/darktable'
 let g:netrw_dirhist_7='/home/bas/.config/bspwm'
+let g:netrw_dirhist_8='/home/bas/Documents/linux-XPS-15-9560/pkg'

@@ -60,9 +60,17 @@ input 1739:31251:DLL07BE:01_06CB:7A13_Touchpad {
 }
 
 bar {
+	id bar-0
+
 	position top
 
-	status_command while date +'%Y-%m-%d %H:%M:%S %p'; do sleep 1; done
+#	status_command while date +'%Y-%m-%d %H:%M:%S %p'; do sleep 1; done
+	status_command i3status -c /home/bas/.config/sway/i3statusconfig0
+#	status_command /home/bas/.config/sway/bar0.sh
+	
+	separator_symbol " | "
+
+	font Terminus (TTF) 8
 
 	colors {
 		statusline #ffffff
@@ -73,9 +81,15 @@ bar {
 }
 
 bar {
+	id bar-1
+
 	position bottom
-	status_command while echo "$(/home/bas/battery)%"; do sleep 1; done
+#	status_command while echo "$(/home/bas/battery)%"; do sleep 1; done
+	status_command /home/bas/.config/sway/bar1.sh
+#	status_command i3status -c /home/bas/.config/sway/i3statusconfig1
 	workspace_buttons no
+	separator_symbol " | "
+	font Terminus (TTF) 8
 	colors {
 		statusline #ffffff
 		background #323232
@@ -349,7 +363,7 @@ bindsym Shift+Print exec prtsel
 bindsym Ctrl+Shift+Print exec --no-startup-id prtwin
 
 bindsym $mod+Ctrl+l exec --no-startup-id aplay /home/bas/Downloads.old/english.wav
-bindsym $mod+l exec --no-startup-id i3lock -i ~/Downloads.old/dd-ar_3.png -p win -b -f -t
+bindsym $mod+l exec --no-startup-id swaylock -i ~/Downloads.old/dd-ar_3.png -f -t
 
 exec --no-startup-id synclient VertScrollDelta=-113 HorizScrollDelta=-113 TapButton1=1 HorizTwoFingerScroll=1 TapButton2=3 TapButton3=2 PalmDetect=1
 exec --no-startup-id synclient VertScrollDelta=-113 HorizScrollDelta=-113 PalmDetect=1 HorizTwoFingerScroll=1
