@@ -64,6 +64,8 @@ set sw=4
 set ml
 set nu
 set fdm=marker
+set ttymouse=sgr
+set tpm=100
 
 call plug#begin('~/.vim/plugged')
 Plug 'w0rp/ale'

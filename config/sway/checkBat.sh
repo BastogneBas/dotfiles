@@ -15,7 +15,7 @@ if [ $pct -lt 11 ]
 then
 	if [ $(cat /sys/class/power_supply/AC/online) -eq 0 ]
 	then
-		echo "BATTERY LOW!!!!"
+		echo -n "BATTERY LOW!!!!"
 		if [ $DISMISS10 -eq 0 ]; then
 			zenity --error --no-wrap --text="Battery critically low!!!\nYour pc could turn off every moment."
 			if [ $? -eq 0 ]
@@ -25,7 +25,7 @@ then
 		fi
 	else
 		DISMISS10=0
-		echo
+		echo -n ""
 	fi
 elif [ $pct -lt 21 ]
 then
@@ -41,11 +41,12 @@ then
 		fi
 	else
 		DISMISS20=0
-		echo
+		echo -n ""
 	fi
 else
-	echo
+	echo -n ""
 fi
 
-echo $DISMISS10 > ~/.config/polybar/DISMISS10
-echo $DISMISS20 > ~/.config/polybar/DISMISS20
+echo -n $DISMISS10 > ~/.config/polybar/DISMISS10 2> /dev/null
+echo -n $DISMISS20 > ~/.config/polybar/DISMISS20 2> /dev/null
+exit 0

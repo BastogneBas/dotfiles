@@ -26,19 +26,19 @@ order += "load"
 
 wireless _first_ {
         format_up = "W: (%quality at %essid, %bitrate) %ip"
-        format_down = ""
+        format_down = "W: down"
 }
 
 ethernet _first_ {
         # if you use %speed, i3status requires root privileges
         format_up = "E: %ip (%speed)"
-        format_down = ""
+        format_down = "E: down"
 }
 
 battery all {
         format = "%status %percentage (%remaining, %consumption)"
-        format_down = ""
-        low_threshold = 20
+        format_down = "No Battery"
+        low_threshold = 10
 		last_full_capacity = true
 }
 
@@ -58,18 +58,17 @@ cpu_temperature 0 {
 }
 
 disk "/" {
-        #format = "/: %used (%percentage_used) of %total"
-        format = "/: %used/%total (%percentage_used)"
+        format = "/: %used (%percentage_used) of %total"
 		low_threshold = 5
 }
 
 disk "/boot" {
-        format = "/boot: %used/%total (%percentage_used)"
+        format = "/boot: %used (%percentage_used) of %total"
 		low_threshold = 5
 }
 
 disk "/home/bas/Downloads" {
-        format = "Downloads: %used/%total (%percentage_used)"
+        format = "Downloads: %used (%percentage_used) of %total"
 		low_threshold = 5
 }
 

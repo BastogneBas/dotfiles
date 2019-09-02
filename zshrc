@@ -47,8 +47,24 @@ alias l='ls -CF'
 alias llh='ls -lh'
 
 # Use emacs keybindings even if our EDITOR is set to vi
+
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+	function zle-line-init() {
+		echoti smkx
+	}
+	function zle-line-finish() {
+		echoti rmkx
+	}
+	zle -N zle-line-init
+	zle -N zle-line-finish
+fi
+
 bindkey -e
-bindkey '\e[3~' delete-char
+bindkey "${terminfo[kdch1]}" delete-char
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[kend]}"  end-of-line
+bindkey '[1;2C' forward-word	# Shift+right
+bindkey '[1;2D' backward-word	# Shift+left
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
@@ -93,6 +109,7 @@ alias cava='urxvt -tr +sb -fn "xft:Terminus:size=3" -e /bin/cava'
 #alias prtscrn='maim -m 1 | xclip -selection clipboard -t image/png'
 #alias prtsel='maim -s -m 1 | xclip -selection clipboard -t image/png'
 alias Ub='cd ~/Dokumentoj/Uberprachtige-KBS-game/'
+alias kbs='cd ~/Dokumentoj/MIDIBar/'
 alias rtos='cd ~/Dokumentoj/RTOS/Huiswerkopdracht/'
 alias SetupMonitors='xrandr --output eDP1 --auto --output DP2 --auto --right-of eDP1 --primary --output HDMI1 --auto --right-of DP2'
 #alias playTuinCamera='ffplay -v quiet -i rtsp://syno:0b722ccc654d26ff0dbc7db9b34324cd@192.168.10.10:554/Sms=1.unicast &'

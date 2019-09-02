@@ -55,25 +55,25 @@ load {
 cpu_temperature 0 {
 		format = "C0: %degrees°C"
 		max_threshold = "70"
-		path = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp2_input"
+		path = "/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp2_input"
 }
 
 cpu_temperature 1 {
 		format = "C1: %degrees°C"
 		max_threshold = "70"
-		path = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp3_input"
+		path = "/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp3_input"
 }
 
 cpu_temperature 2 {
 		format = "C2: %degrees°C"
 		max_threshold = "70"
-		path = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp4_input"
+		path = "/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp4_input"
 }
 
 cpu_temperature 3 {
 		format = "C3: %degrees°C"
 		max_threshold = "70"
-		path = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp5_input"
+		path = "/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp5_input"
 }
 
 disk "/" {

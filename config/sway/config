@@ -30,23 +30,34 @@ exec export SSH_AUTH_SOCK
 #
 output eDP-1 pos 0 0
 output eDP-1 scale 2
-output eDP-1 bg /home/bas/Backgrounds/DSC_1139.JPG fill
+#output DP-2 pos 3840 0
+output DP-2 pos 1920 0
+output DP-1 bg /home/bas/Backgrounds/DSC_1139.JPG fill
 output DP-2 bg /home/bas/Backgrounds/IMG_2154.JPG fill
-output DP-1 bg /home/bas/Backgrounds/IMG_2154.JPG fill
+output eDP-1 bg /home/bas/Backgrounds/IMG_2154.JPG fill
 output HDMI-A-1 bg /home/bas/Backgrounds/DSC_9087.jpg fill
+
+xwayland enable
 
 input 1:1:AT_Translated_Set_2_keyboard {
 	xkb_layout us,us
     xkb_model pc104
     xkb_variant dvorak,intl
-    xkb_options terminate:ctrl_alt_bksp,rupeesign:4,lvl3:ralt_switch,eurosign:5,compose:rctrl
+    xkb_options terminate:ctrl_alt_bksp,rupeesign:4,lvl3:ralt_alt,eurosign:5,compose:rctrl,caps:backspace,grp:alt_caps_toggle,esperanto:dvorak
 }
 
 input 16700:8195:Dell_Dell_USB_Keyboard {
 	xkb_layout us,us
     xkb_model pc104
     xkb_variant dvorak,intl
-    xkb_options terminate:ctrl_alt_bksp,rupeesign:4,lvl3:ralt_switch,eurosign:5,compose:rctrl
+    xkb_options terminate:ctrl_alt_bksp,rupeesign:4,lvl3:ralt_alt,eurosign:5,compose:rctrl,caps:backspace,grp:alt_caps_toggle,esperanto:dvorak
+}
+
+input type:keyboard {
+	xkb_layout us,us
+    xkb_model pc104
+    xkb_variant dvorak,intl
+    xkb_options terminate:ctrl_alt_bksp,rupeesign:4,lvl3:ralt_alt,eurosign:5,compose:rctrl,caps:backspace,grp:alt_caps_toggle,esperanto:dvorak
 }
 
 input 1739:31251:DLL07BE:01_06CB:7A13_Touchpad {
@@ -59,18 +70,19 @@ input 1739:31251:DLL07BE:01_06CB:7A13_Touchpad {
 	click_method clickfinger
 }
 
+
 bar {
 	id bar-0
 
 	position top
 
 #	status_command while date +'%Y-%m-%d %H:%M:%S %p'; do sleep 1; done
-	status_command i3status -c /home/bas/.config/sway/i3statusconfig0
-#	status_command /home/bas/.config/sway/bar0.sh
+#	status_command i3status -c /home/bas/.config/sway/i3statusconfig0
+	status_command /home/bas/.config/sway/bar0.sh
 	
 	separator_symbol " | "
 
-	font Terminus (TTF) 8
+	font Noto Sans Mono 7
 
 	colors {
 		statusline #ffffff
@@ -89,13 +101,17 @@ bar {
 #	status_command i3status -c /home/bas/.config/sway/i3statusconfig1
 	workspace_buttons no
 	separator_symbol " | "
-	font Terminus (TTF) 8
+	font Noto Sans Mono 7
 	colors {
 		statusline #ffffff
 		background #323232
 		inactive_workspace #32323200 #32323200 #5c5c5c
 	}
 }
+
+#bar {
+#	swaybar_command waybar
+#}
 
 # i3 config file (v4)
 #
@@ -134,7 +150,7 @@ set $mod Mod4
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
 #font monospace 10
-font Terminus (TTF) 10
+font Noto Sans Mono 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -149,6 +165,8 @@ floating_modifier $mod
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec termite
+#bindsym $mod+Return exec urxvt
+#bindsym $mod+Return exec alacritty
 
 # start firefox
 bindsym $mod+backslash exec firefox
@@ -296,7 +314,7 @@ bindsym $mod+Shift+j reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+p restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+period exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+period exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit Sway? This will end your X session.' -b 'Yes, exit Sway' 'swaymsg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -344,17 +362,21 @@ default_border none
 gaps inner 20
 gaps outer 0
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% | pactl set-sink-volume 1 +5% | pactl set-sink-volume 2 +5% # increase volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% | pactl set-sink-volume 1 -5% | pactl set-sink-volume 2 -5% # decrease volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle | pactl set-sink-mute 1 toggle | pactl set-sink-mute 2 toggle #mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% | pactl set-sink-volume 1 +5% |     pactl set-sink-volume 2 +5% | pactl set-sink-volume 3 +5% |pactl set-sink-volume 4 +5% # increase volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% | pactl set-sink-volume 1 -5% |     pactl set-sink-volume 2 -5% | pactl set-sink-volume 3 -5% | pactl set-sink-volume 4 -5% # decrease volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle | pactl set-sink-mute 1 toggle | pactl     set-sink-mute 2 toggle | pactl set-sink-mute 3 toggle | pactl set-sink-mute 4 toggle #mute sound
 bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id ~/bin/btVolUp
 bindsym Shift+XF86AudioLowerVolume exec --no-startup-id ~/bin/btVolDown
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-bindsym XF86MonBrightnessUp exec brightnessctl set +5% #increase screen brightness
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%- #decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -ctrl intel_backlight -inc 5 -fps 60 #increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -ctrl intel_backlight -dec 5 -fps 60 #decrease screen brightness
+bindsym Ctrl+XF86MonBrightnessUp exec xbacklight -ctrl intel_backlight -inc 5 -fps 60 #increase screen brightness
+bindsym Ctrl+XF86MonBrightnessDown exec xbacklight -ctrl intel_backlight -dec 5 -fps 60 #decrease screen brightness
+#bindsym XF86MonBrightnessUp exec brightnessctl set +5% #increase screen brightness
+#bindsym XF86MonBrightnessDown exec brightnessctl set 5%- #decrease screen brightness
 #bindsym Shift+XF86MonBrightnessUp exec sudo brightnessctl set +1% #increase screen brightness
 #bindsym Shift+XF86MonBrightnessDown exec sudo brightnessctl set 1%- #decrease screen brightness
 
@@ -364,12 +386,16 @@ bindsym Ctrl+Shift+Print exec --no-startup-id prtwin
 
 bindsym $mod+Ctrl+l exec --no-startup-id aplay /home/bas/Downloads.old/english.wav
 bindsym $mod+l exec --no-startup-id swaylock -i ~/Downloads.old/dd-ar_3.png -f -t
-
+bindsym $mod+Ctrl+Shift+r exec --no-startup-id paplay '/home/bas/Downloads.old/ROKEN IS ZOOO .. Strakke gele zwemslip~3.ogg'
 exec --no-startup-id synclient VertScrollDelta=-113 HorizScrollDelta=-113 TapButton1=1 HorizTwoFingerScroll=1 TapButton2=3 TapButton3=2 PalmDetect=1
 exec --no-startup-id synclient VertScrollDelta=-113 HorizScrollDelta=-113 PalmDetect=1 HorizTwoFingerScroll=1
 exec --no-startup-id nitrogen --restore
 #exec_always --no-startup-id killall compton; compton
 #exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id dunst
+exec udiskie -nAt &
 #exec --no-startup-id swaymsg 'workspace 11; append_layout /home/bas/.config/i3/workspace-11.json'
 #exec --no-startup-id swaymsg 'workspace 11; exec Telegram; workspace 1'
+
+
+for_window [instance="origin.exe"] floating enable

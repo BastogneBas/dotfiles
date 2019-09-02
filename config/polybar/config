@@ -58,7 +58,7 @@ monitor-fallback = ${env:MONITOR:eDP-1}
 dpi = 196
 width = 100%
 ;height = 52
-height = 52
+height = 40
 ;offset-x = 1%
 ;offset-y = 1%
 ;radius = 6.0
@@ -69,7 +69,7 @@ background = ${colors.background}
 foreground = ${colors.foreground}
 
 ;line-size = 2
-line-size = 3
+line-size = 2
 line-color = #f00
 
 ;border-size = 2
@@ -92,14 +92,14 @@ padding-right = 4
 module-margin-left = 2
 module-margin-right = 4
 
-font-0 = unifont:fontformat=truetype:size=8:antialias=false;1
-font-1 = Terminus (TTF):pixelsize=8:antialias=true;0
+font-0 = unifont:fontformat=truetype:size=6:antialias=false;1
+font-1 = Terminus (TTF):pixelsize=6:antialias=true;0
 #font-2 = siji:pixelsize=10;1
 font-2 = "Wuncon Siji:size=20;1"
 
 modules-left = bspwm i3 date xkeyboard mpd prev playpause next spotify
 modules-center = battLow
-modules-right = filesystem xbacklight pulseaudio ethAndroid eth eth2 eth3 wlan memory cpu battery info-hackspeed powermenu
+modules-right = filesystem xbacklight pulseaudio ethAndroid eth eth2 eth3 wlan wlp2s0 memory cpu battery info-hackspeed powermenu
 
 tray-position = right
 tray-detached = false
@@ -134,7 +134,8 @@ inherit = bar/bar1
 bottom = true
 modules-left = fanspeed fanspeed_video xwindow
 modules-center = temperature_c0 temperature_c1 temperature_c2 temperature_c3
-modules-right = clockspeed_c0 clockspeed_c1 clockspeed_c2 clockspeed_c3 clockspeed_c4 clockspeed_c5 clockspeed_c6 clockspeed_c7
+modules-right = clockspeed_c0 clockspeed_c1 clockspeed_c2 clockspeed_c3 
+;clockspeed_c4 clockspeed_c5 clockspeed_c6 clockspeed_c7
 padding-left = 4
 padding-right = 4
 border-bottom-size = 0
@@ -181,7 +182,7 @@ padding-left = 2
 
 modules-left = fanspeed fanspeed_video
 modules-center = temperature_c0 temperature_c1 temperature_c2 temperature_c3
-modules-right = clockspeed_c0 clockspeed_c1
+modules-right = clockspeed_c0 clockspeed_c1 clockspeed_c2 clockspeed_c3 
 
 tray-position = right
 tray-padding = 2
@@ -232,6 +233,7 @@ interval = 25
 
 mount-0 = /
 mount-1 = /boot
+mount-2 = /home/bas/Downloads
 
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
@@ -383,7 +385,7 @@ label = %percentage_used:2%%
 
 [module/wlan]
 type = internal/network
-interface = wlp2s0
+interface = wlan0
 interval = 0.5
 
 format-connected = <ramp-signal> <label-connected>
@@ -402,6 +404,10 @@ ramp-signal-2 = 
 ramp-signal-3 = 
 ramp-signal-4 = 
 ramp-signal-foreground = ${colors.foreground-alt}
+
+[module/wlp2s0]
+inherit = module/wlan
+interface = wlp2s0
 
 [module/eth]
 type = internal/network
@@ -638,12 +644,12 @@ menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
 
 menu-3-0 = hibernate
-menu-3-0-exec = systemctl hibernate
+menu-3-0-exec = systemctl hibernate; i3lock -i ~/Downloads.old/dd-ar_3.png -p win -b -f -t
 menu-3-1 = cancel
 menu-3-1-exec = menu-open-0
 
 menu-4-0 = Ieuw windows
-menu-4-0-exec = sudo gadverdamme
+menu-4-0-exec = sudo gadverdamme; i3lock -i ~/Downloads.old/dd-ar_3.png -p win -b -f -t
 menu-4-1 = cancel
 menu-4-1-exec = menu-open-0
 
