@@ -1,0 +1,15 @@
+default partial alphanumeric_keys
+xkb_symbols "basic" {
+	include "us(dvorak)"
+	include "terminate(ctrl_alt_bksp)"
+	include "rupeesign(4)"
+	include "eurosign(5)"
+	include "level3(rwin_switch)"
+	include "compose(rctrl)"
+	include "capslock(backspace)"
+	include "group(alt_caps_toggle)"
+	include "epo(dvorak)"
+	name[Group1] = "English (Dvorak with personal preferences)";
+	key <RALT> { [ Meta_R, Alt_R, ISO_Level3_Shift ] };
+	key <CAPS> { [ BackSpace, Mode_switch ] };
+};

@@ -114,3 +114,5 @@ alias rtos='cd ~/Dokumentoj/RTOS/Huiswerkopdracht/'
 alias SetupMonitors='xrandr --output eDP1 --auto --output DP2 --auto --right-of eDP1 --primary --output HDMI1 --auto --right-of DP2'
 #alias playTuinCamera='ffplay -v quiet -i rtsp://syno:0b722ccc654d26ff0dbc7db9b34324cd@192.168.10.10:554/Sms=1.unicast &'
 #alias playVoortuinCamera='ffplay -v quiet -i rtsp://syno:83bd80613a2c7f011c5a70381dee2a8b@192.168.10.10:554/Sms=2.unicast &'
+
+export XDG_CURRENT_DESKTOP=Unity

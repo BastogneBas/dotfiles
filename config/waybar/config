@@ -1,16 +1,21 @@
 [{
     "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
+    "height": 25, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/media", "clock", "custom/spotify" ],
-    "modules-center": ["sway/window"],
-    "modules-right": ["idle_inhibitor", "pulseaudio", "network", "network#eth", "cpu", "memory", "temperature", "backlight", "battery", "tray"],
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/media", "clock"],
+    "modules-center": [ "sway/window" ],
+    "modules-right": [ "idle_inhibitor", "backlight", "pulseaudio", "disk", "disk#boot", "disk#downloads", "cpu", "memory", "battery", "tray"],
+	"name": "waybar",
     // Modules configuration
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
+	"sway/window": {
+		"format": "",
+		"max-length": 0
+	},
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
@@ -23,6 +28,8 @@
         "spacing": 10
     },
     "clock": {
+		"interval": 1,
+		"format": "{:%A %d %B %Y %H:%M:%S %Z}",
         "tooltip-format": "{:%Y-%m-%d | %H:%M}",
         "format-alt": "{:%Y-%m-%d}"
     },
@@ -31,18 +38,26 @@
         "tooltip": false
     },
     "memory": {
-        "format": "{}% "
+		"interval": 1,
+        "format": "{used:0.1f}G/{total:0.1f}G ({percentage}%) "
     },
-    "temperature": {
-        // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
-        // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
-    },
+	"disk": {
+		"interval": 1,
+		"format": "{path}: {used}/{total} ({percentage_used}%)",
+		"path": "/"
+	},
+	"disk#boot": {
+		"interval": 1,
+		"format": "{path}: {used}/{total} ({percentage_used}%)",
+		"path": "/boot"
+	},
+	"disk#downloads": {
+		"interval": 1,
+		"format": "{path}: {used}/{total} ({percentage_used}%)",
+		"path": "/home/bas/Downloads"
+	},
     "backlight": {
-        // "device": "acpi_video1",
+        "device": "intel_backlight",
         "format": "{percent}% {icon}",
         "format-icons": ["", ""]
     },
@@ -65,27 +80,11 @@
     "battery#bat1": {
         "bat": "BAT1"
     },
-    "network": {
-        "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
-    },
-	"network#eth": {
-		"interface": "enp*",
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
-	},
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": " ",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
@@ -95,6 +94,7 @@
             "phone": "",
             "portable": "",
             "car": "",
+			"hdmi": "",
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
@@ -102,7 +102,7 @@
     "custom/media": {
         "format": "{icon} {}",
         "return-type": "json",
-        "max-length": 40,
+        "max-length": 60,
         "format-icons": {
             "spotify": "",
             "default": "🎜"
@@ -113,20 +113,119 @@
 	"custom/spotify": {
 	    "format": " {}",
 	    "max-length": 40,
-	    "interval": 30, // Remove this if your script is endless and write in loop
+	    "interval": 1, // Remove this if your script is endless and write in loop
 	    "exec": "$HOME/.config/sway/spotify.sh 2> /dev/null", // Script in resources folder
 	    "exec-if": "pgrep spotify"
 	}
 },
-	{
-		"layer": "top",
-		"position": "bottom",
-		"modules-left": [],
-		"modules-center": [],
-		"modules-right": [ "clock" ],
-		"height": 30,
-		"clock": {
-			"format": "{:%H:%M}"
-		}
+{
+	"layer": "top",
+	"position": "bottom",
+	"modules-left": [ "custom/fanspeed", "custom/fanspeed#GPUFAN", "sway/window" ],
+	"modules-center": [ "temperature", "temperature#C2", "temperature#C3", "temperature#C4" ],
+	"modules-right": [ "network", "network#eth", "custom/corespeed", "custom/corespeed#C1", "custom/corespeed#C2", "custom/corespeed#C3", "custom/gpustatus" ],
+	"height": 25,
+	"name": "waybar",
+	"clock": {
+		"format": "{:%H:%M}"
+	},
+    "network": {
+        "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%): {ipaddr}/{cidr} ",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}, U: {bandwidthUpBits}, D: {bandwidthDownBits}",
+		"interval": 2
+    },
+	"network#eth": {
+		"interface": "enp*",
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}, U: {bandwidthUpBits}, D: {bandwidthDownBits}",
+		"interval": 2
+	},
+    "temperature": {
+        // "thermal-zone": 2,
+		"interval": 1,
+        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp2_input",
+        "critical-threshold": 70,
+        "format-critical": "C1: {temperatureC}°C {icon}",
+        "format": "C1: {temperatureC}°C {icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", "", "", "", "", ""]
+    },
+	"temperature#C2": {
+		"interval": 1,
+        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp3_input",
+        "critical-threshold": 70,
+        "format-critical": "C2: {temperatureC}°C {icon}",
+        "format": "C2: {temperatureC}°C {icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", "", "", "", "", ""]
+	},
+	"temperature#C3": {
+		"interval": 1,
+        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp4_input",
+        "critical-threshold": 70,
+        "format-critical": "C3: {temperatureC}°C {icon}",
+        "format": "C3: {temperatureC}°C {icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", "", "", "", "", ""]
+	},
+	"temperature#C4": {
+		"interval": 1,
+        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp5_input",
+        "critical-threshold": 70,
+        "format-critical": "C4: {temperatureC}°C {icon}",
+        "format": "C4: {temperatureC}°C {icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", "", "", "", "", ""]
+	},
+	"custom/fanspeed": {
+		"exec": "/home/bas/.config/sway/getfanspeedinrpm.sh 1",
+		"format": "{} {icon}",
+		"format-icons": [ "" ],
+//		"interval": 1,
+		"return-type": "json"
+	},
+	"custom/fanspeed#GPUFAN": {
+		"exec": "/home/bas/.config/sway/getfanspeedinrpm.sh 2",
+		"format": "{} {icon}",
+		"format-icons": [ "" ],
+//		"interval": 1,
+		"return-type": "json"
+	},
+	"custom/corespeed": {
+		"exec": "/home/bas/.config/sway/getwaybarclockspeedinghz.sh 0",
+//		"interval": 1,
+		"format": "C0: {} {icon}",
+		"format-icons": [ "", "", "" ],
+		"return-type": "json"
+	},
+	"custom/corespeed#C1": {
+		"exec": "/home/bas/.config/sway/getwaybarclockspeedinghz.sh 1",
+//		"interval": 1,
+		"format": "C1: {} {icon}",
+		"format-icons": [ "", "", "" ],
+		"return-type": "json"
+	},
+	"custom/corespeed#C2": {
+		"exec": "/home/bas/.config/sway/getwaybarclockspeedinghz.sh 2",
+//		"interval": 1,
+		"format": "C2: {} {icon}",
+		"format-icons": [ "", "", "" ],
+		"return-type": "json"
+	},
+	"custom/corespeed#C3": {
+		"exec": "/home/bas/.config/sway/getwaybarclockspeedinghz.sh 3",
+//		"interval": 1,
+		"format": "C3: {} {icon}",
+		"format-icons": [ "", "", "" ],
+		"return-type": "json"
+	},
+	"custom/gpustatus": {
+		"exec": "/home/bas/.config/sway/getgpustatus.sh",
+		"interval": 1,
+		"return-type": "json"
 	}
+}
 ]

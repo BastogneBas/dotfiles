@@ -1,14 +1,14 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-family: Noto Sans Mono, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 12px;
     min-height: 0;
 }
 
 window#waybar {
     background-color: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    border-bottom: 2px solid rgba(100, 114, 125, 0.5);
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
@@ -18,14 +18,12 @@ window#waybar.hidden {
     opacity: 0.2;
 }
 
-/*
 window#waybar.empty {
     background-color: transparent;
 }
-window#waybar.solo {
+/*window#waybar.solo {
     background-color: #FFFFFF;
-}
-*/
+}*/
 
 window#waybar.termite {
     background-color: #3F3F3F;
@@ -36,17 +34,37 @@ window#waybar.chromium {
     border: none;
 }
 
+window#waybar.firefox {
+	background-color: #ff6d12;
+	border: none;
+}
+
+window#waybar.Telegram {
+	background-color: #158bc6;
+	border: none;
+}
+
+window#waybar.VIM {
+	background-color: #00752a;
+	border: none;
+}
+
+window#waybar.spotify {
+	background-color: #1ed760;
+	border: none;
+}
+
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button {
     padding: 0 5px;
     background-color: transparent;
     color: #ffffff;
-    border-bottom: 3px solid transparent;
+    border-bottom: 2px solid transparent;
 }
 
 #workspaces button.focused {
     background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
 }
 
 #workspaces button.urgent {
@@ -55,7 +73,27 @@ window#waybar.chromium {
 
 #mode {
     background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+
+#custom-corespeed {
+	min-width: 80px;
+}
+
+#custom-fanspeed {
+	min-width: 130px;
+}
+#custom-fanspeed.high {
+	background: #eb4d4b;
+}
+#custom-gpustatus.gpuon,
+#custom-corespeed.high,
+#custom-fanspeed.medium {
+	background: #f0932b;
+}
+#custom-corespeed.low,
+#custom-fanspeed.low {
+    background: #26A65B;
 }
 
 #clock,
@@ -69,6 +107,10 @@ window#waybar.chromium {
 #custom-media,
 #tray,
 #mode,
+#disk,
+#custom-fanspeed,
+#custom-corespeed,
+#custom-gpustatus,
 #idle_inhibitor {
     padding: 0 10px;
     margin: 0 4px;
@@ -129,6 +171,9 @@ label:focus {
 
 #network.disconnected {
     background-color: #f53c3c;
+	margin: 0;
+	padding: 0;
+	opacity: 0;
 }
 
 #pulseaudio {
@@ -156,7 +201,8 @@ label:focus {
 }
 
 #temperature {
-    background-color: #f0932b;
+    background-color: #26A65B;
+	min-width: 80px;
 }
 
 #temperature.critical {

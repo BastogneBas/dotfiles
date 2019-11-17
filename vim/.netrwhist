@@ -1,9 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/home/bas/Documents/systemd-git/pkg'
-let g:netrw_dirhist_2='/home/bas/Dokumentoj/MIDIBar/src/VHDL/software/C'
-let g:netrw_dirhist_3='/home/bas/Documents/linux-mainline/pkg'
-let g:netrw_dirhist_4='/home/bas/Documents/linux-XPS-15-9560'
-let g:netrw_dirhist_5='/etc/netctl'
-let g:netrw_dirhist_6='/home/bas/.config/termite'
-let g:netrw_dirhist_7='/home/bas/.config/sway'
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/etc/modules-load.d'
+let g:netrw_dirhist_2='/home/bas/Packages/virtualbox-modules-mainline'
+let g:netrw_dirhist_1='/home/bas/.xkb'
