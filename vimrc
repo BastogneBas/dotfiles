@@ -66,6 +66,8 @@ set nu
 set fdm=marker
 set ttymouse=sgr
 set tpm=100
+"set cul
+set cc=80
 
 call plug#begin('~/.vim/plugged')
 Plug 'w0rp/ale'

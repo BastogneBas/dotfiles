@@ -34,11 +34,13 @@ window#waybar.chromium {
     border: none;
 }
 
+window#waybar.firefox-wayland,
 window#waybar.firefox {
 	background-color: #ff6d12;
 	border: none;
 }
 
+window#waybar.telegram-desktop,
 window#waybar.Telegram {
 	background-color: #158bc6;
 	border: none;
@@ -50,7 +52,12 @@ window#waybar.VIM {
 }
 
 window#waybar.spotify {
-	background-color: #1ed760;
+	background-color: #1db954;
+	border: none;
+}
+
+window#waybar.libreoffice-writer {
+	background-color: #1489cc;
 	border: none;
 }
 

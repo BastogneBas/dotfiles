@@ -39,6 +39,17 @@ gpuline()
 	fi
 }
 
+cputempline()
+{
+	tempinput=$(cat /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp$1_input)
+	if [ $tempinput -gt 70000 ]
+	then
+		awk "BEGIN { printf(\"{\\\"full_text\\\":\\\"C$(($1-2)): %02.1f°C\\\", \\\"color\\\":\\\"#ff0000\\\"},\", $tempinput/1000) }"
+	else
+		awk "BEGIN { printf(\"{\\\"full_text\\\":\\\"C$(($1-2)): %02.1f°C\\\", \\\"color\\\":\\\"#ffffff\\\"},\", $tempinput/1000) }"
+	fi
+}
+
 a()
 {
 	read line; echo $line
@@ -49,10 +60,16 @@ a()
 		read line
 		#echo $line || exit 1
 		echo ",["
+		echo "{\"full_text\":\"OpenGL: $(eselect opengl show)\"},"
+		echo "{\"min_width\":75,\"full_text\":\" \"},"
 		fan1line
 		fan2line
 		echo "{\"min_width\":75,\"full_text\":\" \"},"
-		echo "${line:2:-1}," || exit 1
+#		echo "${line:2:-1}," || exit 1
+		cputempline 2
+		cputempline 3
+		cputempline 4
+		cputempline 5
 		echo "{\"min_width\":75,\"full_text\":\" \"},"
 		echo "{\"full_text\":\"C0: $(~/.config/sway/getclockspeedinghz.sh 0)GHz\"},"
 		echo "{\"full_text\":\"C1: $(~/.config/sway/getclockspeedinghz.sh 1)GHz\"},"

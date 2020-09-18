@@ -1,0 +1,53 @@
+Section "Files"
+  ModulePath "/usr/lib/nvidia"
+  ModulePath "/usr/lib32/nvidia"
+  ModulePath "/usr/lib32/nvidia/xorg/modules"
+  ModulePath "/usr/lib32/xorg/modules"
+  ModulePath "/usr/lib64/nvidia/xorg/modules"
+  ModulePath "/usr/lib64/xorg/modules"
+EndSection
+
+Section "ServerLayout"
+  Identifier "layout"
+  Screen 0 "nvidia" 0 0
+#  Screen 1 "intel"  0 0
+#  Inactive "intel"
+EndSection
+
+Section "Device"
+  Identifier "nvidia"
+  Driver "nvidia"
+  BusID "PCI:11:0:0"
+#  BusID "PCI:1:0:0"
+  Option "AllowExternalGpus" "Yes"
+  Option "CoolBits" "28"
+EndSection
+
+Section "Monitor"
+  Identifier "Monitor0"
+  VendorName "Unknown"
+  ModelName  "DELL U2713HM"
+  Option     "DPMS"
+EndSection
+
+Section "Screen"
+  Identifier "nvidia"
+  Device "nvidia"
+  Monitor "Monitor0"
+  Option "AllowExternalGpus" "Yes"
+  Option "metamodes" "DP-0: nvidia-auto-select +1920+0, DVI-D-0: nvidia-auto-select +0+0, DP-3: nvidia-auto-select +4480+0"
+#  Option "AllowEmptyInitialConfiguration" "Yes"
+#  Option "UseDisplayDevice" "none"
+EndSection
+
+Section "Device"
+  Identifier "intel"
+  Driver "intel"
+#  Driver "modesetting"
+#  Option "AccelMethod" "none"
+EndSection
+
+Section "Screen"
+  Identifier "intel"  
+  Device "intel"
+EndSection

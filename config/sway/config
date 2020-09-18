@@ -19,6 +19,7 @@
 exec xrdb -merge ~/.Waylandresources
 
 #exec dbus-update-activation-environment --systemd DISPLAY
+exec dbus-launch --autolaunch=$(cat /var/lib/dbus/machine-id)
 exec 'eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)'
 exec export SSH_AUTH_SOCK
 
@@ -29,13 +30,29 @@ exec export SSH_AUTH_SOCK
 # }}}
 #
 output eDP-1 pos 0 0
-output eDP-1 scale 1.50
+output eDP-1 scale 1.875
 #output DP-2 pos 3840 0
-output DP-2 pos 2560 0
+output DP-2 pos 2048 0
 output DP-1 bg /home/bas/Backgrounds/arch_btw_DSC_1139.JPG fill
 output DP-2 bg /home/bas/Backgrounds/arch_btw_DSC_1139.JPG fill
 output eDP-1 bg /home/bas/Backgrounds/arch_btw_IMG_2154.JPG fill
 output HDMI-A-1 bg /home/bas/Backgrounds/arch_btw_DSC_9087.jpg fill
+output HDMI-A-1 scale 1.000001
+
+output "Dell Inc. DELL U2713HM GK0KD28G151L" {
+	pos 1920 0
+	bg /home/bas/Backgrounds/arch_btw_IMG_2154.JPG fill
+}
+
+output "Samsung Electric Company SyncMaster H9XS207534" {
+	pos 0 0
+	bg /home/bas/Backgrounds/arch_btw_DSC_1139.JPG fill
+}
+
+output "Dell Inc. DELL 1704FPT W4916561A517" {
+	pos 4480 0
+	bg /home/bas/Backgrounds/arch_btw_DSC_9087.jpg fill
+}
 
 xwayland enable
 
@@ -174,7 +191,7 @@ bindsym $mod+Return exec termite
 bindsym $mod+Mod5+T exec zenity --info
 
 # start firefox
-bindsym $mod+backslash exec firefox-beta
+bindsym $mod+backslash exec firefox
 
 # Take screenshot
 bindsym $mod+Print exec "gnome-screenshot -i"
@@ -184,12 +201,12 @@ bindcode $mod+Shift+24 kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+e exec dmenu_run
-bindsym $mod+e exec wofi --show run
+bindsym $mod+e exec wofi --show run -e -i
 bindsym $mod+semicolon exec rofi -show emoji -foht emoji
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+Shift+e exec --no-startup-id wofi --show drun -i -m
+bindsym $mod+Shift+e exec --no-startup-id wofi --show drun -i -m -I
 
 # change focus
 bindsym $mod+h focus left
@@ -256,7 +273,7 @@ set $ws10 "10"
 set $ws11 "11 "
 set $ws12 "12 "
 set $ws13 "13 "
-set $ws14 "14"
+set $ws14 "14 "
 set $ws15 "15"
 set $ws16 "16"
 set $ws17 "17"
@@ -364,7 +381,7 @@ mode "resize" {
 #}
 
 default_border none
-gaps inner 20
+gaps inner 0
 gaps outer 0
 
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% | pactl set-sink-volume 1 +5% |     pactl set-sink-volume 2 +5% | pactl set-sink-volume 3 +5% |pactl set-sink-volume 4 +5% # increase volume
@@ -379,8 +396,8 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-bindsym XF86MonBrightnessUp exec xbacklight -ctrl intel_backlight -inc 10 -fps 60 #increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -ctrl intel_backlight -dec 10 -fps 60 #decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -ctrl intel_backlight -inc 2 -fps 60 #increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -ctrl intel_backlight -dec 2 -fps 60 #decrease screen brightness
 #bindsym Ctrl+XF86MonBrightnessUp exec xbacklight -ctrl intel_backlight -inc 10 -fps 60 #increase screen brightness
 #bindsym Ctrl+XF86MonBrightnessDown exec xbacklight -ctrl intel_backlight -dec 10 -fps 60 #decrease screen brightness
 #bindsym XF86MonBrightnessUp exec brightnessctl set +5% #increase screen brightness
@@ -412,11 +429,18 @@ exec --no-startup-id mako
 exec udiskie -nAt &
 #exec --no-startup-id swaymsg 'workspace 11; append_layout /home/bas/.config/i3/workspace-11.json'
 #exec --no-startup-id swaymsg 'workspace 11; exec Telegram; workspace 1'
-assign [class=".*Telegram.*"] workspace $ws11
+assign [app_id=".*telegram-desktop.*"] workspace $ws11
+#assign [name=".*Telegram.*"] workspace $ws11
 assign [class=".*Spotify.*"] workspace $ws12
 assign [app_id=".*thunderbird.*"] workspace $ws13
-exec Telegram
+assign [class=".*discord.*"] workspace $ws14
+exec telegram-desktop
 
+#Fancy rotation on Ctrl+Alt+Arrow
+bindsym Ctrl+Alt+Up output eDP-1 transform 0
+bindsym Ctrl+Alt+Down output eDP-1 transform 180
+bindsym Ctrl+Alt+Left output eDP-1 transform 90
+bindsym Ctrl+Alt+Right output eDP-1 transform 270
 
 for_window [instance="origin.exe"] floating enable
 #exec_always --no-startup-id flashfocus

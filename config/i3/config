@@ -58,12 +58,14 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-#bindsym $mod+Return exec urxvt
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec urxvt
+#bindsym $mod+Return exec termite
 #bindsym $mod+Return exec xterm
 
 # start firefox
+#bindsym $mod+backslash exec /usr/bin/firefox
 bindsym $mod+backslash exec /usr/bin/firefox
+bindsym $mod+Shift+bar exec /usr/bin/qutebrowser
 
 # Take screenshot
 bindsym $mod+Print exec "gnome-screenshot -i"
@@ -74,11 +76,12 @@ bindcode $mod+Shift+24 kill
 # start dmenu (a program launcher)
 #bindsym $mod+e exec dmenu_run
 bindsym $mod+e exec rofi -show run
-bindsym $mod+semicolon exec rofi -show emoji -foht emoji
+bindsym $mod+semicolon exec rofimoji.py
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+Shift+e exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+Shift+e exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+Shift+e exec rofi -show drun
 
 # change focus
 bindsym $mod+h focus left
@@ -142,10 +145,10 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
-set $ws11 "11 Telegram"
-set $ws12 "12 Spotify"
-set $ws13 "13 Thunderbird"
-set $ws14 "14"
+set $ws11 "11 "
+set $ws12 "12 "
+set $ws13 "13 "
+set $ws14 "14 "
 set $ws15 "15"
 set $ws16 "16"
 set $ws17 "17"
@@ -284,21 +287,24 @@ bar {
 	position top
 	status_command /home/bas/.config/i3status/bar0.sh
 	separator_symbol "|"
-	font pango:Terminus (TTF) 5
+	font pango:Terminus (TTF) 10
 	output DP0
 	output DP1
 	output DP2
+	output DP3
 	output HDMI0
 	output HDMI1
 	output HDMI2
 	output DP-0
 	output DP-1
 	output DP-2
+	output DP-3
 	output HDMI-0
 	output HDMI-1
 	output HDMI-2
 	output DP-1-1
 	output DP-1-2
+	output DP-1-3
 	output HDMI-1-1
 	output HDMI-1-2
 	output DVI-D-0
@@ -306,6 +312,7 @@ bar {
 	output DisplayPort-3
 	output DisplayPort-4
 	output HDMI-A-2
+	output VGA-0
 	colors {
 		statusline #ffffff
 		background #323232
@@ -318,21 +325,24 @@ bar {
 	position bottom
 	status_command /home/bas/.config/i3status/bar1.sh
 	separator_symbol "|"
-	font pango:Terminus (TTF) 5
+	font pango:Terminus (TTF) 10
 	output DP0
 	output DP1
 	output DP2
+	output DP3
 	output HDMI0
 	output HDMI1
 	output HDMI2
 	output DP-0
 	output DP-1
 	output DP-2
+	output DP-3
 	output HDMI-0
 	output HDMI-1
 	output HDMI-2
 	output DP-1-1
 	output DP-1-2
+	output DP-1-3
 	output HDMI-1-1
 	output HDMI-1-2
 	output DVI-D-0
@@ -340,6 +350,7 @@ bar {
 	output DisplayPort-3
 	output DisplayPort-4
 	output HDMI-A-2
+	output VGA-0
 	colors {
 		statusline #ffffff
 		background #323232
@@ -348,11 +359,14 @@ bar {
 }
 
 default_border none
-gaps inner 20
+gaps inner 0
 gaps outer 0
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% # increase volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% # decrease volume
+bindsym Mod5+F3 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2%
+bindsym Mod5+F2 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%
+bindsym Mod5+F1 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% # increase volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% # decrease volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle #mute sound
 bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id ~/bin/btVolUp
 bindsym Shift+XF86AudioLowerVolume exec --no-startup-id ~/bin/btVolDown
@@ -365,32 +379,39 @@ bindsym XF86AudioPrev exec playerctl previous
 #bindsym Shift+XF86MonBrightnessUp exec sudo brightnessctl set +1% #increase screen brightness
 #bindsym Shift+XF86MonBrightnessDown exec sudo brightnessctl set 1%- #decrease screen brightness
 
-bindsym XF86MonBrightnessUp exec xbacklight -ctrl intel_backlight -inc 10 -fps 60 #increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -ctrl intel_backlight -dec 10 -fps 60 #decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -ctrl intel_backlight -inc 2 -fps 60 #increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -ctrl intel_backlight -dec 2 -fps 60 #decrease screen brightness
 #bindsym Shift+XF86MonBrightnessUp exec sudo brightnessctl set +1% #increase screen brightness
 #bindsym Shift+XF86MonBrightnessDown exec sudo brightnessctl set 1%- #decrease screen brightness
 
-bindsym Print exec --no-startup-id maim -u -m 1 | xclip -selection clipboard -t image/png
+bindsym Print exec --no-startup-id prtscrn
 #bindsym Shift+Print exec --no-startup-id maim -s -u -m 1 | xclip -selection clipboard -t image/png
 bindsym Shift+Print exec --no-startup-id prtsel
+bindsym $mod+Shift+Print exec --no-startup-id prtshowsel
 
-bindsym $mod+Ctrl+l exec --no-startup-id paplay /home/bas/SoundBoard/english.wav
 bindsym $mod+l exec --no-startup-id i3lock -i ~/Downloads.old/dd-ar_3.png -p win -b -f -t
-bindsym $mod+Ctrl+Shift+r exec --no-startup-id paplay '/home/bas/SoundBoard/ROKEN IS ZOOO .. Strakke gele zwemslip~3.ogg'
 
-exec --no-startup-id synclient VertScrollDelta=-113 HorizScrollDelta=-113 TapButton1=1 HorizTwoFingerScroll=1 TapButton2=3 TapButton3=2 PalmDetect=1
-#exec --no-startup-id synclient VertScrollDelta=-113 HorizScrollDelta=-113 PalmDetect=1 HorizTwoFingerScroll=1
+bindsym $mod+Ctrl+Shift+l exec --no-startup-id paplay /home/bas/SoundBoard/english.wav
+bindsym $mod+Ctrl+Shift+r exec --no-startup-id paplay '/home/bas/SoundBoard/ROKEN IS ZOOO .. Strakke gele zwemslip~3.ogg'
+bindsym $mod+Ctrl+Shift+c exec --no-startup-id mpv --fs '/home/bas/SoundBoard/CoffinDance.mp4'
+bindsym $mod+Ctrl+Shift+g exec --no-startup-id mpv '/home/bas/SoundBoard/JOUW GULP STAAT OPEN2.mp4'
+
+#exec --no-startup-id synclient VertScrollDelta=-113 HorizScrollDelta=-113 TapButton1=1 HorizTwoFingerScroll=1 TapButton2=3 TapButton3=2 PalmDetect=1
+exec --no-startup-id synclient VertScrollDelta=-113 HorizScrollDelta=-113 PalmDetect=1 HorizTwoFingerScroll=1
 exec_always --no-startup-id nitrogen --restore
 #exec --no-startup-id killall compton; compton
 #exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id dunst
 exec_always --no-startup-id killall udiskie; udiskie -nAt &
-assign [class=".*Telegram.*"] workspace "11 Telegram"
-assign [class=".*Spotify.*"] workspace "12 Spotify"
-assign [class=".*thunderbird.*"] workspace "13 Thunderbird"
-exec --no-startup-id Telegram
+assign [class=".*Telegram.*"] workspace $ws11
+assign [class=".*Spotify.*"] workspace $ws12
+assign [class=".*thunderbird.*"] workspace $ws13
+assign [title="QmusicNL.m3u8 - mpv"] workspace $ws15
+exec --no-startup-id telegram-desktop
 exec --no-startup-id optimus-manager-qt
 #exec --no-startup-id i3-msg 'workspace Telegram; append_layout /home/bas/.config/i3/workspace-11.json'
 #exec --no-startup-id i3-msg 'workspace Telegram; exec Telegram &; workspace 1'
 
 for_window [instance="origin.exe"] floating enable
+
+exec --no-startup-id feh --bg-fill Backgrounds/arch_btw_DSC_9087.jpg

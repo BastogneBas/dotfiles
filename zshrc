@@ -67,8 +67,8 @@ bindkey '[1;2C' forward-word	# Shift+right
 bindkey '[1;2D' backward-word	# Shift+left
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=100000
+SAVEHIST=100000
 HISTFILE=~/.zsh_history
 
 # Use modern completion system
@@ -115,4 +115,16 @@ alias SetupMonitors='xrandr --output eDP1 --auto --output DP2 --auto --right-of 
 #alias playTuinCamera='ffplay -v quiet -i rtsp://syno:0b722ccc654d26ff0dbc7db9b34324cd@192.168.10.10:554/Sms=1.unicast &'
 #alias playVoortuinCamera='ffplay -v quiet -i rtsp://syno:83bd80613a2c7f011c5a70381dee2a8b@192.168.10.10:554/Sms=2.unicast &'
 
-export XDG_CURRENT_DESKTOP=Unity
+#export XDG_CURRENT_DESKTOP=Unity
+export GPG_TTY=$(tty)
+
+
+# Motd
+fortune | cowsay | lolcat -f > ~/Downloads/fortune
+cat ~/Downloads/fortune
+
+PATH="/home/bas/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/bas/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/bas/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/bas/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/bas/perl5"; export PERL_MM_OPT;

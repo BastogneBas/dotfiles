@@ -15,10 +15,12 @@ sudo umount config/mpDris2
 sudo umount config/neofetch
 sudo umount config/nitrogen
 sudo umount config/polybar
+sudo umount config/qutebrowser
 sudo umount config/rofi
 sudo umount config/sway
 sudo umount config/swaylock
 sudo umount config/termite
 sudo umount config/waybar
+sudo umount config/X11
 
 sudo umount etc/X11

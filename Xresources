@@ -1,4 +1,4 @@
-Xft*dpi:		164
+Xft*dpi:		216
 !Xft*antialias:		true
 !Xft*hinting:		full
 
@@ -8,7 +8,7 @@ rofi.modi: window,run,ssh,windowcd,drun,combi,keys
 !rofi.font: emoji 12
 !urxvt*font:			xft:Terminus:size=10,Inconsolata:size=10
 !urxvt*font:			xft:Bitstream Terminal:size=10
-urxvt*font:			xft:Inconsolata:size=9
+urxvt*font:			xft:Inconsolata:size=10
 !urxvt*font:			xft:xos4 Terminus:size=12
 !urxvt*font:			xos4 Terminus:size=12
 urxvt*foreground:	#ffffff
@@ -17,17 +17,21 @@ urxvt*background:	rgba:0000/0000/0000/af00
 !URxvt.perl-ext-common: fullscreen
 !URxvt.keysym.F11:	perl:fullscreen:switch
 URxvt*scrollBar:	false
+urxvt*saveLines:	10000
 !Xft*dpi:		220
 !Xft*antialias:		true
 !Xft*hinting:		full
 !URxvt*transparent:	true
 !URxv*shading:		20
 
-XTerm.vt100.background:	black
-XTerm.vt100.foreground: white
+!XTerm.vt100.background:	black
+!XTerm.vt100.foreground: white
+XTerm.*.background:	black
+XTerm.*.foreground: white
 !XTerm.vt100.faceSize:	16
 !XTerm.vt100.font:		xft:xos4 Terminus:size=12
-XTerm.vt100.font:		xft:Inconsolata:size=9
+!XTerm.vt100.font:		xft:Inconsolata:size=9
+XTerm.*.font:			xft:Inconsolata:size=9
 !XTerm.vt100.font:		xos4 Terminus:size=12
 !XTerm.vt100.font:		Inconsolata
 

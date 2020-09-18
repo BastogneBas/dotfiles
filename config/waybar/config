@@ -129,6 +129,10 @@
 	"clock": {
 		"format": "{:%H:%M}"
 	},
+	"sway/window": {
+		"format": "{}",
+		"max-length": 50
+	},
     "network": {
         "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%): {ipaddr}/{cidr} ",
@@ -150,7 +154,7 @@
     "temperature": {
         // "thermal-zone": 2,
 		"interval": 1,
-        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp2_input",
+        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon6/temp2_input",
         "critical-threshold": 70,
         "format-critical": "C1: {temperatureC}°C {icon}",
         "format": "C1: {temperatureC}°C {icon}",
@@ -158,7 +162,7 @@
     },
 	"temperature#C2": {
 		"interval": 1,
-        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp3_input",
+        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon6/temp3_input",
         "critical-threshold": 70,
         "format-critical": "C2: {temperatureC}°C {icon}",
         "format": "C2: {temperatureC}°C {icon}",
@@ -166,7 +170,7 @@
 	},
 	"temperature#C3": {
 		"interval": 1,
-        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp4_input",
+        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon6/temp4_input",
         "critical-threshold": 70,
         "format-critical": "C3: {temperatureC}°C {icon}",
         "format": "C3: {temperatureC}°C {icon}",
@@ -174,7 +178,7 @@
 	},
 	"temperature#C4": {
 		"interval": 1,
-        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp5_input",
+        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon6/temp5_input",
         "critical-threshold": 70,
         "format-critical": "C4: {temperatureC}°C {icon}",
         "format": "C4: {temperatureC}°C {icon}",
