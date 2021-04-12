@@ -1,0 +1,1 @@
+/home/bas/Documents/Qmusic-essentials-linux/pyQmusic-getInfo

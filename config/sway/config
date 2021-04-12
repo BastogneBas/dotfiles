@@ -16,7 +16,7 @@
 #exec xrandr --output eDP1 --auto --output DP1 --auto --right-of eDP1 --primary
 #exec xrandr --output eDP1 --auto --output DP2 --auto --right-of eDP1 --primary --output HDMI1 --auto --right-of DP2
 
-exec xrdb -merge ~/.Waylandresources
+#exec xrdb -merge ~/.Waylandresources
 
 #exec dbus-update-activation-environment --systemd DISPLAY
 exec dbus-launch --autolaunch=$(cat /var/lib/dbus/machine-id)
@@ -33,26 +33,60 @@ output eDP-1 pos 0 0
 output eDP-1 scale 1.875
 #output DP-2 pos 3840 0
 output DP-2 pos 2048 0
-output DP-1 bg /home/bas/Backgrounds/arch_btw_DSC_1139.JPG fill
-output DP-2 bg /home/bas/Backgrounds/arch_btw_DSC_1139.JPG fill
-output eDP-1 bg /home/bas/Backgrounds/arch_btw_IMG_2154.JPG fill
-output HDMI-A-1 bg /home/bas/Backgrounds/arch_btw_DSC_9087.jpg fill
+#output DP-1 bg /home/bas/Backgrounds/amoledbg.png fill
+#output DP-2 bg /home/bas/Backgrounds/amoledbg.png fill
+#output HDMI-A-1 bg /home/bas/Backgrounds/amoledbg.png fill
 output HDMI-A-1 scale 1.000001
 
+output "Sharp Corporation 0x1476 0x00000000" {
+	pos 0 1440
+	scale 1.875
+#	bg /home/bas/Backgrounds/amoledbg.png fill
+}
+
 output "Dell Inc. DELL U2713HM GK0KD28G151L" {
-	pos 1920 0
-	bg /home/bas/Backgrounds/arch_btw_IMG_2154.JPG fill
+	pos 0 0
+#	bg /home/bas/Backgrounds/amoledbg.png fill
 }
 
 output "Samsung Electric Company SyncMaster H9XS207534" {
-	pos 0 0
-	bg /home/bas/Backgrounds/arch_btw_DSC_1139.JPG fill
+	pos 0 446
+#	bg /home/bas/Backgrounds/amoledbg.png fill
 }
 
 output "Dell Inc. DELL 1704FPT W4916561A517" {
-	pos 4480 0
-	bg /home/bas/Backgrounds/arch_btw_DSC_9087.jpg fill
+	pos 4480 446
+#	bg /home/bas/Backgrounds/amoledbg.png fill
 }
+
+output "Goldstar Company Ltd LG Ultra HD 0x0000A3BA" {
+	mode 3840x2160
+	pos 2048 446
+	#scale 1.08607
+	scale 1
+#	bg /home/bas/Backgrounds/amoledbg.png fill
+}
+
+output "Unknown ASUS MB16ACM L9LMTF051822" {
+	mode 1920x1080
+	pos 2048 1440
+#	bg /home/bas/Backgrounds/amoledbg.png fill
+}
+
+output "Samsung Electric Company SyncMaster HMBB903933" {
+	mode 1920x1200
+	pos 5888 1406
+#	pos 5583 789
+#	bg /home/bas/Backgrounds/amoledbg.png fill
+}
+
+output HEADLESS-1 {
+	pos 0 0
+	mode 2560x1440
+#	bg /home/bas/Backgrounds/amoledbg.png fill
+}
+
+bindsym XF86Launch1 exec /home/bas/.config/sway/changeDisplayScale.sh m
 
 xwayland enable
 
@@ -75,9 +109,10 @@ input type:keyboard {
     xkb_model pc104
     xkb_variant ,intl
     xkb_options terminate:ctrl_alt_bksp,rupeesign:4,lvl3:ralt_switch,eurosign:5,compose:rctrl,caps:backspace,grp:alt_caps_toggle,esperanto:dvorak
+	xkb_numlock enabled
 }
 
-input 1739:31251:DLL07BE:01_06CB:7A13_Touchpad {
+input 2:7:SynPS/2_Synaptics_TouchPad {
 	tap enabled
 	natural_scroll enabled
 	scroll_factor 0.5
@@ -170,7 +205,8 @@ set $mod Mod4
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
 #font monospace 10
-font Noto Sans Mono 8
+#font Noto Sans Mono 8
+font Comic Mono 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -194,7 +230,7 @@ bindsym $mod+Mod5+T exec zenity --info
 bindsym $mod+backslash exec firefox
 
 # Take screenshot
-bindsym $mod+Print exec "gnome-screenshot -i"
+#bindsym $mod+Print exec "gnome-screenshot -i"
 
 # kill focused window
 bindcode $mod+Shift+24 kill
@@ -231,6 +267,11 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
+bindsym $mod+Shift+Ctrl+Left move left 1px
+bindsym $mod+Shift+Ctrl+Down move down 1px
+bindsym $mod+Shift+Ctrl+Up move up 1px
+bindsym $mod+Shift+Ctrl+Right move right 1px
 
 # split in horizontal orientation
 bindsym $mod+d split h
@@ -274,38 +315,38 @@ set $ws11 "11 "
 set $ws12 "12 "
 set $ws13 "13 "
 set $ws14 "14 "
-set $ws15 "15"
-set $ws16 "16"
+set $ws15 "15 "
+set $ws16 "16 "
 set $ws17 "17"
-set $ws18 "18"
-set $ws19 "19"
+set $ws18 "18 "
+set $ws19 "19 "
 set $ws20 "20"
 set $ws21 "21"
 set $ws22 "22"
 
 # switch to workspace
-bindsym $mod+1	workspace $ws1
-bindsym $mod+2	workspace $ws2
-bindsym $mod+3	workspace $ws3
-bindsym $mod+4	workspace $ws4
-bindsym $mod+5	workspace $ws5
-bindsym $mod+6	workspace $ws6
-bindsym $mod+7	workspace $ws7
-bindsym $mod+8	workspace $ws8
-bindsym $mod+9	workspace $ws9
-bindsym $mod+0	workspace $ws10
-bindsym $mod+F1	workspace $ws11
-bindsym $mod+F2	workspace $ws12
-bindsym $mod+F3	workspace $ws13
-bindsym $mod+F4	workspace $ws14
-bindsym $mod+F5	workspace $ws15
-bindsym $mod+F6	workspace $ws16
-bindsym $mod+F7	workspace $ws17
-bindsym $mod+F8	workspace $ws18
-bindsym $mod+F9	workspace $ws19
-bindsym $mod+F10	workspace $ws20
-bindsym $mod+F11	workspace $ws21
-bindsym $mod+F12	workspace $ws22
+bindsym $mod+1  workspace $ws1
+bindsym $mod+2  workspace $ws2
+bindsym $mod+3  workspace $ws3
+bindsym $mod+4  workspace $ws4
+bindsym $mod+5  workspace $ws5
+bindsym $mod+6  workspace $ws6
+bindsym $mod+7  workspace $ws7
+bindsym $mod+8  workspace $ws8
+bindsym $mod+9  workspace $ws9
+bindsym $mod+0  workspace $ws10
+bindsym $mod+F1  workspace $ws11
+bindsym $mod+F2  workspace $ws12
+bindsym $mod+F3  workspace $ws13
+bindsym $mod+F4  workspace $ws14
+bindsym $mod+F5  workspace $ws15
+bindsym $mod+F6  workspace $ws16
+bindsym $mod+F7  workspace $ws17
+bindsym $mod+F8  workspace $ws18
+bindsym $mod+F9  workspace $ws19
+bindsym $mod+F10  workspace $ws20
+bindsym $mod+F11  workspace $ws21
+bindsym $mod+F12  workspace $ws22
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -346,32 +387,32 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-#        bindsym h resize shrink width 10 px or 10 ppt
-#        bindsym h resize shrink width 10 px or 10 ppt
-#        bindsym t resize grow height 10 px or 10 ppt
-#        bindsym n resize shrink height 10 px or 10 ppt
-#        bindsym Shift+s resize grow width 1 px or 1 ppt
-#        bindsym Shift+t resize grow height 1 px or 1 ppt
-#        bindsym Shift+n resize shrink height 1 px or 1 ppt
-#        bindsym Shift+s resize grow width 1 px or 1 ppt
+        #bindsym h resize shrink width 10 px or 10 ppt
+        #bindsym h resize shrink width 10 px or 10 ppt
+        bindsym t resize grow height 10 px or 10 ppt
+        bindsym n resize shrink height 10 px or 10 ppt
+        bindsym Shift+s resize grow width 1 px or 1 ppt
+        bindsym Shift+t resize grow height 1 px or 1 ppt
+        bindsym Shift+n resize shrink height 1 px or 1 ppt
+        #bindsym Shift+s resize grow width 1 px or 1 ppt
 
         # same bindings, but for the arrow keys
-#        bindsym Left resize shrink width 10 px or 10 ppt
-#        bindsym Down resize grow height 10 px or 10 ppt
-#        bindsym Up resize shrink height 10 px or 10 ppt
-#        bindsym Right resize grow width 10 px or 10 ppt
-#        bindsym Shift+Left resize shrink width 1 px or 1 ppt
-#        bindsym Shift+Down resize grow height 1 px or 1 ppt
-#        bindsym Shift+Up resize shrink height 1 px or 1 ppt
-#        bindsym Shift+Right resize grow width 1 px or 1 ppt
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Shift+Left resize shrink width 1 px or 1 ppt
+        bindsym Shift+Down resize grow height 1 px or 1 ppt
+        bindsym Shift+Up resize shrink height 1 px or 1 ppt
+        bindsym Shift+Right resize grow width 1 px or 1 ppt
 
         # back to normal: Enter or Escape or $mod+r
-#        bindsym Return mode "default"
-#        bindsym Escape mode "default"
-#        bindsym $mod+p mode "default"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+p mode "default"
 }
 
-#bindsym $mod+p mode "resize"
+bindsym $mod+p mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -381,8 +422,9 @@ mode "resize" {
 #}
 
 default_border none
-gaps inner 0
+gaps inner 10px
 gaps outer 0
+smart_gaps on
 
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% | pactl set-sink-volume 1 +5% |     pactl set-sink-volume 2 +5% | pactl set-sink-volume 3 +5% |pactl set-sink-volume 4 +5% # increase volume
 #bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% | pactl set-sink-volume 1 -5% |     pactl set-sink-volume 2 -5% | pactl set-sink-volume 3 -5% | pactl set-sink-volume 4 -5% # decrease volume
@@ -407,33 +449,39 @@ bindsym XF86MonBrightnessDown exec xbacklight -ctrl intel_backlight -dec 2 -fps 
 
 bindsym Print exec prtscrn
 bindsym Shift+Print exec prtsel
+bindsym $mod+Shift+Print exec prtshowsel
 bindsym Ctrl+Shift+Print exec --no-startup-id prtwin
 
-bindsym $mod+Ctrl+l exec --no-startup-id aplay /home/bas/Downloads.old/english.wav
+bindsym $mod+Ctrl+l exec --no-startup-id aplay /home/bas/SoundBoard/english.wav
 bindsym $mod+l exec --no-startup-id swaylock
-bindsym $mod+Ctrl+Shift+r exec --no-startup-id paplay '/home/bas/Downloads.old/ROKEN IS ZOOO .. Strakke gele zwemslip~3.ogg'
+bindsym $mod+Ctrl+Shift+r exec --no-startup-id paplay '/home/bas/SoundBoard/ROKEN IS ZOOO .. Strakke gele zwemslip~3.ogg'
 
 exec --no-startup-id swayidle -w \
-	timeout 600 'swaymsg "output * dpms off"'\
-		resume 'swaymsg "output * dpms on"'\
 	timeout 605 'swaylock'\
 	before-sleep 'swaylock'
+#	timeout 600 'swaymsg "output * dpms off"'\
+#		resume 'swaymsg "output * dpms on"'\
 
-exec --no-startup-id synclient VertScrollDelta=-113 HorizScrollDelta=-113 TapButton1=1 HorizTwoFingerScroll=1 TapButton2=3 TapButton3=2 PalmDetect=1
-exec --no-startup-id synclient VertScrollDelta=-113 HorizScrollDelta=-113 PalmDetect=1 HorizTwoFingerScroll=1
+#exec --no-startup-id synclient VertScrollDelta=-113 HorizScrollDelta=-113 TapButton1=1 HorizTwoFingerScroll=1 TapButton2=3 TapButton3=2 PalmDetect=1
+#exec --no-startup-id synclient VertScrollDelta=-113 HorizScrollDelta=-113 PalmDetect=1 HorizTwoFingerScroll=1
 #exec --no-startup-id nitrogen --restore
 #exec_always --no-startup-id killall compton; compton
 #exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #exec --no-startup-id dunst
-exec --no-startup-id mako
-exec udiskie -nAt &
+#exec --no-startup-id mako
+#exec udiskie -nAt &
 #exec --no-startup-id swaymsg 'workspace 11; append_layout /home/bas/.config/i3/workspace-11.json'
 #exec --no-startup-id swaymsg 'workspace 11; exec Telegram; workspace 1'
-assign [app_id=".*telegram-desktop.*"] workspace $ws11
+assign [class=".*Telegram.*"] workspace $ws11
 #assign [name=".*Telegram.*"] workspace $ws11
 assign [class=".*Spotify.*"] workspace $ws12
-assign [app_id=".*thunderbird.*"] workspace $ws13
+#assign [name=".*Spotify.*"] workspace $ws12
+assign [class=".*Thunderbird.*"] workspace $ws13
+#assign [name=".*Thunderbird.*"] workspace $ws13
 assign [class=".*discord.*"] workspace $ws14
+assign [title="QmusicNL.m3u8 - mpv"] workspace $ws15
+assign [app_id=".*pavucontrol.*"] workspace $ws16
+assign [title="Session streamed by \\"ssrtspd\\" - mpv"] workspace $ws19
 exec telegram-desktop
 
 #Fancy rotation on Ctrl+Alt+Arrow
@@ -443,5 +491,9 @@ bindsym Ctrl+Alt+Left output eDP-1 transform 90
 bindsym Ctrl+Alt+Right output eDP-1 transform 270
 
 for_window [instance="origin.exe"] floating enable
+for_window [app_id="zenity"] floating enable
+
+exec oguri
+exec exec /home/bas/Packages/sunpaper/sunpaper.sh -c && /home/bas/Packages/sunpaper/sunpaper.sh
 #exec_always --no-startup-id flashfocus
 #bindsym $mod+b exec --no-startup-id flash_window

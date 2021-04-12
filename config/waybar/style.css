@@ -1,17 +1,24 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: Noto Sans Mono, Roboto, Helvetica, Arial, sans-serif;
+    font-family: Comic Mono, Noto Sans Mono, Roboto, Helvetica, Arial, sans-serif;
     font-size: 12px;
     min-height: 0;
 }
 
 window#waybar {
     background-color: rgba(43, 48, 59, 0.5);
-    border-bottom: 2px solid rgba(100, 114, 125, 0.5);
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
+}
+
+window#waybar.bottom {
+	border-top: 2px solid rgba(100, 114, 125, 0.5);
+}
+
+window#waybar.top {
+    border-bottom: 2px solid rgba(100, 114, 125, 0.5);
 }
 
 window#waybar.hidden {
@@ -66,12 +73,19 @@ window#waybar.libreoffice-writer {
     padding: 0 5px;
     background-color: transparent;
     color: #ffffff;
-    border-bottom: 2px solid transparent;
+	box-shadow: inset 0 -3px transparent;
+    /*border-bottom: 2px solid transparent;*/
+}
+
+#workspaces button:hover {
+	background: rgba(0, 0, 0, 0.2);
+	box-shadow: inset 0 -3px #ffffff;
 }
 
 #workspaces button.focused {
     background-color: #64727D;
-    border-bottom: 2px solid #ffffff;
+	box-shadow: inset 0 -3px #ffffff;
+    /*border-bottom: 2px solid #ffffff;*/
 }
 
 #workspaces button.urgent {
@@ -103,6 +117,10 @@ window#waybar.libreoffice-writer {
     background: #26A65B;
 }
 
+#custom-Qmusic {
+	background: #ED3624;
+}
+
 #clock,
 #battery,
 #cpu,
@@ -118,10 +136,24 @@ window#waybar.libreoffice-writer {
 #custom-fanspeed,
 #custom-corespeed,
 #custom-gpustatus,
+#custom-Qmusic,
 #idle_inhibitor {
     padding: 0 10px;
     margin: 0 4px;
     color: #ffffff;
+}
+
+#window,
+#workspaces {
+	margin: 0 4px;
+}
+
+.modules-left > widget:first-child > #workspaces {
+	margin-left: 0;
+}
+
+.modules-right > widget:last-child > #workspaces {
+	margin-right: 0;
 }
 
 #clock {
@@ -133,7 +165,7 @@ window#waybar.libreoffice-writer {
     color: #000000;
 }
 
-#battery.charging {
+#battery.charging, #battery.plugged {
     color: #ffffff;
     background-color: #26A65B;
 }
@@ -178,9 +210,6 @@ label:focus {
 
 #network.disconnected {
     background-color: #f53c3c;
-	margin: 0;
-	padding: 0;
-	opacity: 0;
 }
 
 #pulseaudio {
@@ -245,3 +274,822 @@ label:focus {
 #mpd.paused {
     background-color: #51a37a;
 }
+
+#language {
+	background: #00b093;
+	color: #740864;
+	padding: 0 5px;
+	margin: 0 5px;
+	min-width: 16px;
+}
+
+/* {{{ Qmusic styles */
+#custom-Qmusic.q-darkblue-darkblue {
+background: #000087;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-darkblue {
+background: #000087;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-clearblue {
+background: #000087;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-darkblue {
+background: #0087FF;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-teal {
+background: #000087;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-darkblue {
+background: #00BFB3;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-pastelgreen {
+background: #000087;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-darkblue {
+background: #00BFB3;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-yellow {
+background: #000087;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-darkblue {
+background: #F9D423;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-purple {
+background: #000087;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-darkblue {
+background: #D26EE6;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-pastelpink {
+background: #000087;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-darkblue {
+background: #D26EE6;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-green {
+background: #000087;
+color: #97D700;
+}
+#custom-Qmusic.q-green-darkblue {
+background: #97D700;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-blue {
+background: #000087;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-darkblue {
+background: #5BC2E7;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-red {
+background: #000087;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-darkblue {
+background: #ED3624;
+color: #000087;
+}
+#custom-Qmusic.q-clearblue-darkblue {
+background: #0087FF;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-clearblue {
+background: #000087;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-clearblue {
+background: #0087FF;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-clearblue {
+background: #0087FF;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-teal {
+background: #0087FF;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-clearblue {
+background: #00BFB3;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-pastelgreen {
+background: #0087FF;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-clearblue {
+background: #00BFB3;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-yellow {
+background: #0087FF;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-clearblue {
+background: #F9D423;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-purple {
+background: #0087FF;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-clearblue {
+background: #D26EE6;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-pastelpink {
+background: #0087FF;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-clearblue {
+background: #D26EE6;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-green {
+background: #0087FF;
+color: #97D700;
+}
+#custom-Qmusic.q-green-clearblue {
+background: #97D700;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-blue {
+background: #0087FF;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-clearblue {
+background: #5BC2E7;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-red {
+background: #0087FF;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-clearblue {
+background: #ED3624;
+color: #0087FF;
+}
+#custom-Qmusic.q-teal-darkblue {
+background: #00BFB3;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-teal {
+background: #000087;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-clearblue {
+background: #00BFB3;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-teal {
+background: #0087FF;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-teal {
+background: #00BFB3;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-teal {
+background: #00BFB3;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-pastelgreen {
+background: #00BFB3;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-teal {
+background: #00BFB3;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-yellow {
+background: #00BFB3;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-teal {
+background: #F9D423;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-purple {
+background: #00BFB3;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-teal {
+background: #D26EE6;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-pastelpink {
+background: #00BFB3;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-teal {
+background: #D26EE6;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-green {
+background: #00BFB3;
+color: #97D700;
+}
+#custom-Qmusic.q-green-teal {
+background: #97D700;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-blue {
+background: #00BFB3;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-teal {
+background: #5BC2E7;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-red {
+background: #00BFB3;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-teal {
+background: #ED3624;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-darkblue {
+background: #00BFB3;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-pastelgreen {
+background: #000087;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-clearblue {
+background: #00BFB3;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-pastelgreen {
+background: #0087FF;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-teal {
+background: #00BFB3;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-pastelgreen {
+background: #00BFB3;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-pastelgreen {
+background: #00BFB3;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-pastelgreen {
+background: #00BFB3;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-yellow {
+background: #00BFB3;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-pastelgreen {
+background: #F9D423;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-purple {
+background: #00BFB3;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-pastelgreen {
+background: #D26EE6;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-pastelpink {
+background: #00BFB3;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-pastelgreen {
+background: #D26EE6;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-green {
+background: #00BFB3;
+color: #97D700;
+}
+#custom-Qmusic.q-green-pastelgreen {
+background: #97D700;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-blue {
+background: #00BFB3;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-pastelgreen {
+background: #5BC2E7;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-red {
+background: #00BFB3;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-pastelgreen {
+background: #ED3624;
+color: #00BFB3;
+}
+#custom-Qmusic.q-yellow-darkblue {
+background: #F9D423;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-yellow {
+background: #000087;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-clearblue {
+background: #F9D423;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-yellow {
+background: #0087FF;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-teal {
+background: #F9D423;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-yellow {
+background: #00BFB3;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-pastelgreen {
+background: #F9D423;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-yellow {
+background: #00BFB3;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-yellow {
+background: #F9D423;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-yellow {
+background: #F9D423;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-purple {
+background: #F9D423;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-yellow {
+background: #D26EE6;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-pastelpink {
+background: #F9D423;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-yellow {
+background: #D26EE6;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-green {
+background: #F9D423;
+color: #97D700;
+}
+#custom-Qmusic.q-green-yellow {
+background: #97D700;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-blue {
+background: #F9D423;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-yellow {
+background: #5BC2E7;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-red {
+background: #F9D423;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-yellow {
+background: #ED3624;
+color: #F9D423;
+}
+#custom-Qmusic.q-purple-darkblue {
+background: #D26EE6;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-purple {
+background: #000087;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-clearblue {
+background: #D26EE6;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-purple {
+background: #0087FF;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-teal {
+background: #D26EE6;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-purple {
+background: #00BFB3;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-pastelgreen {
+background: #D26EE6;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-purple {
+background: #00BFB3;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-yellow {
+background: #D26EE6;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-purple {
+background: #F9D423;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-purple {
+background: #D26EE6;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-purple {
+background: #D26EE6;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-pastelpink {
+background: #D26EE6;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-purple {
+background: #D26EE6;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-green {
+background: #D26EE6;
+color: #97D700;
+}
+#custom-Qmusic.q-green-purple {
+background: #97D700;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-blue {
+background: #D26EE6;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-purple {
+background: #5BC2E7;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-red {
+background: #D26EE6;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-purple {
+background: #ED3624;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-darkblue {
+background: #D26EE6;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-pastelpink {
+background: #000087;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-clearblue {
+background: #D26EE6;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-pastelpink {
+background: #0087FF;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-teal {
+background: #D26EE6;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-pastelpink {
+background: #00BFB3;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-pastelgreen {
+background: #D26EE6;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-pastelpink {
+background: #00BFB3;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-yellow {
+background: #D26EE6;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-pastelpink {
+background: #F9D423;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-purple {
+background: #D26EE6;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-pastelpink {
+background: #D26EE6;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-pastelpink {
+background: #D26EE6;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-pastelpink {
+background: #D26EE6;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-green {
+background: #D26EE6;
+color: #97D700;
+}
+#custom-Qmusic.q-green-pastelpink {
+background: #97D700;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-blue {
+background: #D26EE6;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-pastelpink {
+background: #5BC2E7;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-red {
+background: #D26EE6;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-pastelpink {
+background: #ED3624;
+color: #D26EE6;
+}
+#custom-Qmusic.q-green-darkblue {
+background: #97D700;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-green {
+background: #000087;
+color: #97D700;
+}
+#custom-Qmusic.q-green-clearblue {
+background: #97D700;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-green {
+background: #0087FF;
+color: #97D700;
+}
+#custom-Qmusic.q-green-teal {
+background: #97D700;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-green {
+background: #00BFB3;
+color: #97D700;
+}
+#custom-Qmusic.q-green-pastelgreen {
+background: #97D700;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-green {
+background: #00BFB3;
+color: #97D700;
+}
+#custom-Qmusic.q-green-yellow {
+background: #97D700;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-green {
+background: #F9D423;
+color: #97D700;
+}
+#custom-Qmusic.q-green-purple {
+background: #97D700;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-green {
+background: #D26EE6;
+color: #97D700;
+}
+#custom-Qmusic.q-green-pastelpink {
+background: #97D700;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-green {
+background: #D26EE6;
+color: #97D700;
+}
+#custom-Qmusic.q-green-green {
+background: #97D700;
+color: #97D700;
+}
+#custom-Qmusic.q-green-green {
+background: #97D700;
+color: #97D700;
+}
+#custom-Qmusic.q-green-blue {
+background: #97D700;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-green {
+background: #5BC2E7;
+color: #97D700;
+}
+#custom-Qmusic.q-green-red {
+background: #97D700;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-green {
+background: #ED3624;
+color: #97D700;
+}
+#custom-Qmusic.q-blue-darkblue {
+background: #5BC2E7;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-blue {
+background: #000087;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-clearblue {
+background: #5BC2E7;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-blue {
+background: #0087FF;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-teal {
+background: #5BC2E7;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-blue {
+background: #00BFB3;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-pastelgreen {
+background: #5BC2E7;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-blue {
+background: #00BFB3;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-yellow {
+background: #5BC2E7;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-blue {
+background: #F9D423;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-purple {
+background: #5BC2E7;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-blue {
+background: #D26EE6;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-pastelpink {
+background: #5BC2E7;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-blue {
+background: #D26EE6;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-green {
+background: #5BC2E7;
+color: #97D700;
+}
+#custom-Qmusic.q-green-blue {
+background: #97D700;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-blue {
+background: #5BC2E7;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-blue {
+background: #5BC2E7;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-red {
+background: #5BC2E7;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-blue {
+background: #ED3624;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-red-darkblue {
+background: #ED3624;
+color: #000087;
+}
+#custom-Qmusic.q-darkblue-red {
+background: #000087;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-clearblue {
+background: #ED3624;
+color: #0087FF;
+}
+#custom-Qmusic.q-clearblue-red {
+background: #0087FF;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-teal {
+background: #ED3624;
+color: #00BFB3;
+}
+#custom-Qmusic.q-teal-red {
+background: #00BFB3;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-pastelgreen {
+background: #ED3624;
+color: #00BFB3;
+}
+#custom-Qmusic.q-pastelgreen-red {
+background: #00BFB3;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-yellow {
+background: #ED3624;
+color: #F9D423;
+}
+#custom-Qmusic.q-yellow-red {
+background: #F9D423;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-purple {
+background: #ED3624;
+color: #D26EE6;
+}
+#custom-Qmusic.q-purple-red {
+background: #D26EE6;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-pastelpink {
+background: #ED3624;
+color: #D26EE6;
+}
+#custom-Qmusic.q-pastelpink-red {
+background: #D26EE6;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-green {
+background: #ED3624;
+color: #97D700;
+}
+#custom-Qmusic.q-green-red {
+background: #97D700;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-blue {
+background: #ED3624;
+color: #5BC2E7;
+}
+#custom-Qmusic.q-blue-red {
+background: #5BC2E7;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-red {
+background: #ED3624;
+color: #ED3624;
+}
+#custom-Qmusic.q-red-red {
+background: #ED3624;
+color: #ED3624;
+}
+#custom-Qmusic.q-orange-red {
+background: #FF9700;
+color: #ED3624;
+}
+#custom-Qmusic.q-all-blue {
+background: #5BC2E7;
+color: #FFFFFF;
+}
+/* }}} */

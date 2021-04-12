@@ -12,4 +12,6 @@ xkb_symbols "dvorak-personal" {
 	name[Group1] = "English (Dvorak with personal preferences)";
 	key <RALT> { [ Meta_R, Alt_R, ISO_Level3_Shift ] };
 	key <CAPS> { [ BackSpace, Mode_switch ] };
+	key <AD05> { [ y, Y, U133, U132 ] };
+	key <LSGT> { [ U133, U132 ] };
 };

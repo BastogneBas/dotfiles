@@ -1,4 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =2
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/bas/.config/alacritty'
+let g:netrw_dirhist_6='/home/bas/Downloads'
+let g:netrw_dirhist_5='/home/bas/.config/alacritty'
+let g:netrw_dirhist_4='/etc/local.d'
+let g:netrw_dirhist_3='/opt/foldingathome'
 let g:netrw_dirhist_2='/home/bas/.vim/plugged'
 let g:netrw_dirhist_1='/home/bas/Documents/Stage/Internship AROBS/__Code stuff/Design/Realization/Finished_code/Balanced_Drone_Algorithm'

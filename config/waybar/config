@@ -1,12 +1,12 @@
 [{
     "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "position": "top", // Waybar position (top|bottom|left|right)
     "height": 25, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/media", "clock"],
-    "modules-center": [ "sway/window" ],
-    "modules-right": [ "idle_inhibitor", "backlight", "pulseaudio", "disk", "disk#boot", "disk#downloads", "cpu", "memory", "battery", "tray"],
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/media", "clock", "sway/language"],
+    "modules-center": [ "sway/window", "custom/Qmusic" ],
+    "modules-right": [ "custom/sunpaper", "idle_inhibitor", "backlight", "pulseaudio", "disk", "disk#boot", "disk#downloads", "cpu", "memory", "battery", "battery#hidpp0", "battery#hidpp1", "tray"],
 	"name": "waybar",
     // Modules configuration
     "sway/mode": {
@@ -15,6 +15,10 @@
 	"sway/window": {
 		"format": "",
 		"max-length": 0
+	},
+	"sway/workspaces": {
+		"disable-scroll-wraparound": true,
+		"enable-bar-scroll": true
 	},
     "idle_inhibitor": {
         "format": "{icon}",
@@ -30,6 +34,7 @@
     "clock": {
 		"interval": 1,
 		"format": "{:%A %d %B %Y %H:%M:%S %Z}",
+		"tooltip": true,
         "tooltip-format": "{:%Y-%m-%d | %H:%M}",
         "format-alt": "{:%Y-%m-%d}"
     },
@@ -43,17 +48,20 @@
     },
 	"disk": {
 		"interval": 1,
-		"format": "{path}: {used}/{total} ({percentage_used}%)",
+		"format": "{path}: {percentage_used}%",
+		"format-alt": "{path}: {used}/{total} ({percentage_used}%)",
 		"path": "/"
 	},
 	"disk#boot": {
 		"interval": 1,
-		"format": "{path}: {used}/{total} ({percentage_used}%)",
+		"format": "{path}: {percentage_used}%",
+		"format-alt": "{path}: {used}/{total} ({percentage_used}%)",
 		"path": "/boot"
 	},
 	"disk#downloads": {
 		"interval": 1,
-		"format": "{path}: {used}/{total} ({percentage_used}%)",
+		"format": "{path}: {percentage_used}%",
+		"format-alt": "{path}: {used}/{total} ({percentage_used}%)",
 		"path": "/home/bas/Downloads"
 	},
     "backlight": {
@@ -80,6 +88,12 @@
     "battery#bat1": {
         "bat": "BAT1"
     },
+	"battery#hidpp0": {
+		"bat": "hidpp_battery_0"
+	},
+	"battery#hidpp1": {
+		"bat": "hidpp_battery_1"
+	},
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon}",
@@ -101,10 +115,12 @@
     },
     "custom/media": {
         "format": "{icon} {}",
+        "format-alt": "{icon} {}",
         "return-type": "json",
         "max-length": 60,
         "format-icons": {
             "spotify": "",
+			"firefox": "",
             "default": "🎜"
         },
         "escape": true,
@@ -116,14 +132,32 @@
 	    "interval": 1, // Remove this if your script is endless and write in loop
 	    "exec": "$HOME/.config/sway/spotify.sh 2> /dev/null", // Script in resources folder
 	    "exec-if": "pgrep spotify"
+	},
+	"custom/Qmusic": {
+		"format": " {}",
+		"max-length": 100,
+		"return-type": "json",
+		"exec": "$HOME/.config/waybar/Qmusic.sh w"
+		//"exec-if": "pgrep QMusic",
+		//"on-click": "kill -USR1 $(pgrep Qmusic.sh)",
+		//"on-click-right": "kill -USR2 $(pgrep Qmusic.sh)"
+	},
+	"custom/sunpaper": {
+		"exec": "/home/bas/Packages/sunpaper/sunpaper.sh --waybar",
+		"interval": 60,
+		"return-type": "json"
 	}
 },
 {
 	"layer": "top",
 	"position": "bottom",
-	"modules-left": [ "custom/fanspeed", "custom/fanspeed#GPUFAN", "sway/window" ],
-	"modules-center": [ "temperature", "temperature#C2", "temperature#C3", "temperature#C4" ],
-	"modules-right": [ "network", "network#eth", "custom/corespeed", "custom/corespeed#C1", "custom/corespeed#C2", "custom/corespeed#C3", "custom/gpustatus" ],
+	//"modules-left": [ "custom/fanspeed", "custom/fanspeed#GPUFAN", "sway/window" ],
+	"modules-left": [ "sway/workspaces", "sway/window" ],
+	//"modules-center": [ "temperature", "temperature#C2", "temperature#C3", "temperature#C4" ],
+	"modules-center": [ ],
+	//"modules-right": [ "network", "network#eth", "custom/corespeed", "custom/corespeed#C1", "custom/corespeed#C2", "custom/corespeed#C3", "custom/gpustatus" ],
+	//"modules-right": [ "network", "network#eth", "custom/corespeed", "custom/corespeed#C1", "custom/corespeed#C2", "custom/corespeed#C3" ],
+	"modules-right": [ "network", "network#eth" ],
 	"height": 25,
 	"name": "waybar",
 	"clock": {
@@ -132,6 +166,10 @@
 	"sway/window": {
 		"format": "{}",
 		"max-length": 50
+	},
+	"sway/workspaces": {
+		"disable-scroll-wraparound": true,
+		"enable-bar-scroll": true
 	},
     "network": {
         "interface": "wlp2*", // (Optional) To force the use of this interface

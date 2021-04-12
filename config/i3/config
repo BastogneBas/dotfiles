@@ -58,8 +58,8 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec urxvt
-#bindsym $mod+Return exec termite
+#bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec termite
 #bindsym $mod+Return exec xterm
 
 # start firefox
@@ -106,6 +106,10 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+bindsym $mod+Ctrl+Shift+Left move left 1px
+bindsym $mod+Ctrl+Shift+Down move down 1px
+bindsym $mod+Ctrl+Shift+Up move up 1px
+bindsym $mod+Ctrl+Shift+Right move right 1px
 
 # split in horizontal orientation
 bindsym $mod+d split h
@@ -305,6 +309,12 @@ bar {
 	output DP-1-1
 	output DP-1-2
 	output DP-1-3
+	output DP-2-1
+	output DP-2-2
+	output DP-2-3
+	output DP2-1
+	output DP2-2
+	output DP2-3
 	output HDMI-1-1
 	output HDMI-1-2
 	output DVI-D-0
@@ -343,6 +353,12 @@ bar {
 	output DP-1-1
 	output DP-1-2
 	output DP-1-3
+	output DP-2-1
+	output DP-2-2
+	output DP-2-3
+	output DP2-1
+	output DP2-2
+	output DP2-3
 	output HDMI-1-1
 	output HDMI-1-2
 	output DVI-D-0
